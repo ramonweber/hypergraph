@@ -24,22 +24,36 @@ The full research geometry library RGeoLib that implements various geometric alg
 
 # How to use this repository
 
-The repository features 3 different ways to access the files 
+The repository features 4 different ways to access the files 
 1. Full source code for your own experimentation via the `/ResearchGeometryLibrary/RGeoLib`
-2. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
-3. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
+2. Visualization tools for representing floorplans as hypergraphs
+3. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
+4. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
 
 # Requirements
 
-The package development version is tested on a Windows operating system. While the .Net geometry library should be platform independent, the sample files require a Windows operating system as well as the following software:
+The package development version is tested on a Windows operating system. While the .Net geometry library, as well as the hypergraph visualizer are platform independent, the sample files require a Windows operating system as well as the following software:
 
 - CAD environment [Rhino3d](https://rhino3d.com/ "rhino") (version7) 
 - Environmental simulation [Climate Studio](https://www.solemma.com/climatestudio "cs") (version 2.0.8742.29048)
+- Python `3.10.12` for the hypergraph visualization
+
+# Hypergraph Visualizer
+
+Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as sample hypergraphs. A json file with geometry data can be found in `samples/sample_hypergraphs.ipynb`
+
+| ![input](img/sample_graph_original.JPG) | ![output](img/sample_graph.JPG) |
+|:--:|:--:|  # This centers the images in their respective columns
+| Original architectural floor plan | Resulting hypergraph from programmatic zones |
 
 # Sample files and demos
 
-The sample files require the CAD software. The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:/geolib`
-The two sample scripts showcase how the hypergraph implementation can be used to create artificially generated floor plans from a library of input floor plans. In the `/samples/Hypergraph Reference Script 1 Transfer Layout via Hypergraph.3dm` six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The second set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts `/samples/Hypergraph Reference Script 2 Environmental Simulation.3dm`. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
+The sample files require the CAD software. The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:/geolib`. In Rhino3d the `.3dm` file has to be loaded. Then the Grasshopper environment inside Rhino3d can be started and the corresponding `.gh` file loaded with the same name.
+
+The three sample scripts showcase how the hypergraph implementation can be used to create artificially generated floor plans from a library of input floor plans. In the first script the `/samples/Hypergraph Reference Script 0 Load Hypergraph.3dm` a `.json` file with example hypergraphs can be loaded and visualized in the CAD environment. In the `/samples/Hypergraph Reference Script 1 Transfer Layout via Hypergraph.3dm` six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The second set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts `/samples/Hypergraph Reference Script 2 Environmental Simulation.3dm`. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
+
+![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%200%20Load%20Hypergraph.JPG)
+*Sample Script 0: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a json file is used to load a floorplan from a hypergraph format.*
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
 *Sample Script 1: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan from a custom library can be selected to be applied to a target geometry. The research geometry implementation The CAD file defines boundary geometry, circulation access and façade as a series of lines.*
