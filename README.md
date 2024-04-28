@@ -11,12 +11,12 @@ Contact: reweber@mit.edu
 
 # Contents
 
-- [Introduction](#HypergraphResearchGeometryLibraryandAPI)
+- [Introduction](#hypergraph-research-geometry-library-and-api)
 - [Overview](#overview)
-- [How to use this repository](#Howtousethisrepository)
-- [Requirements](#Requirements)
-- [Sample files and demos](#SamplefilesandintegrationintoCAD)
-- [Web API](#FloorPlannerAPI)
+- [How to use this repository](#how-to-use-this-repository)
+- [Requirements](#requirements)
+- [Sample files and demos](#sample-files-and-integration-into-cad)
+- [Web API](#floorplanner-api)
 
 # Overview
 
@@ -39,7 +39,7 @@ The package development version is tested on a Windows operating system. While t
 # Sample files and demos
 
 The sample files require the CAD software. The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:/geolib`
-The two sample scripts showcase how the hypergraph implementation can be used to create artificially generated floor plans from a library of input floor plans. In the 'Sample Script 1' six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The second set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts 'Sample Script 2'. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
+The two sample scripts showcase how the hypergraph implementation can be used to create artificially generated floor plans from a library of input floor plans. In the `/samples/Hypergraph Reference Script 1 Transfer Layout via Hypergraph.3dm` six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The second set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts `/samples/Hypergraph Reference Script 2 Environmental Simulation.3dm`. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
 *Sample Script 1: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan from a custom library can be selected to be applied to a target geometry. The research geometry implementation The CAD file defines boundary geometry, circulation access and façade as a series of lines.*
