@@ -7,7 +7,7 @@ This package is maintained by [@ramonweber](https://github.com/ramonweber) with 
 Contact: reweber@mit.edu
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
-*Figure 1: Illustration of the hypergraph representation and environmental analysis*
+*Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
 
 # Contents
 
