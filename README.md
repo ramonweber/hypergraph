@@ -1,27 +1,53 @@
 # Hypergraph Research Geometry Library and API
 
-Full source code and documentation of ongoing architectural geometry research. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
+Full source code and documentation of ongoing architectural geometry research on automated floor plan analysis and generation. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
 
-This is a work in progress! 
+This package is maintained by [https://github.com/ramonweber](@ramonweber) with contributions from [https://github.com/szvsw](@szvsw) for the web api implementation.
 contact: reweber@mit.edu
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis*
 
-## How to use this repository
+# Contents
+
+- [Overview](#overview)
+- [How to use this repository](##How to use this repository)
+- [Sample files and demos](## Sample files and integration into CAD)
+- [Web API](#FloorPlanner API)
+
+# Overview
+
+The full research geometry library RGeoLib that implements various geometric algorithms and translates geometry from the CAD package Rhino3d for design automation and analysis of buildings. The geometry library implements data structures for vectors, meshes, lines, hypergraphs, apartments. This repository section gives an overview of the library, the required software packages, as well as the accompanying sample scripts.
+
+# How to use this repository
 
 The repository features 3 different ways to access the files 
 1. Full source code for your own experimentation via the `/ResearchGeometryLibrary/RGeoLib`
 2. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
 3. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
 
-# Sample files and integration into CAD
+# Requirements
 
-The sample files require the CAD software [Rhino3d](https://rhino3d.com/ "Optional title") (version7). The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:\geolib`
+The package development version is tested on a Windows operating system. While the .Net geometry library should be platform independent, the sample files require a Windows operating system as well as the following software:
+
+- CAD environment [Rhino3d](https://rhino3d.com/ "rhino") (version7) 
+- Environmental simulation [Climate Studio](https://www.solemma.com/climatestudio "cs") (version 2.0.8742.29048)
+
+# Sample files and demos
+
+The sample files require the CAD software. The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:/geolib`
+The two sample scripts showcase how the hypergraph implementation can be used to create artificially generated floor plans from a library of input floor plans. In the 'Sample Script 1' six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The second set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts 'Sample Script 2'. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
+
+![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
+*Sample Script 1: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan from a custom library can be selected to be applied to a target geometry. The research geometry implementation The CAD file defines boundary geometry, circulation access and façade as a series of lines.*
+
+![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
+*Sample Script 2: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan is analyzed in terms of space, energy use and daylight.*
+
 
 # FloorPlanner API
 
-Scaffold for integrating the hypergraph functionality and floor plan analysis library into a web API. Contributed by @szvsw.
+Scaffold for integrating the hypergraph functionality and floor plan analysis library into a web API. Contributed by  
 
 ## Consuming the API
 
