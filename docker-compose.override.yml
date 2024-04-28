@@ -1,0 +1,9 @@
+version: '3'
+services:
+  api:
+    command: ["--reload"]
+    volumes:
+      - ./api:/usr/src/app/api
+      - ./dlls:/usr/src/app/dlls
+      - ./database:/usr/src/app/database
+    restart: always
