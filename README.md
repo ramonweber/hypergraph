@@ -26,7 +26,7 @@ The full research geometry library RGeoLib that implements various geometric alg
 
 The repository features 4 different ways to access the files 
 1. Full source code for your own experimentation via the `/ResearchGeometryLibrary/RGeoLib`
-2. Visualization tools for representing floorplans as hypergraphs
+2. Visualization tools for representing floorplans as hypergraphs `/notebooks/visualize_hypergraph.ipynb`
 3. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
 4. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
 
