@@ -2,18 +2,21 @@
 
 Full source code and documentation of ongoing architectural geometry research on automated floor plan analysis and generation. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
 
-This package is maintained by [https://github.com/ramonweber](@ramonweber) with contributions from [https://github.com/szvsw](@szvsw) for the web api implementation.
-contact: reweber@mit.edu
+This package is maintained by [@ramonweber](https://github.com/ramonweber) with contributions from [@szvsw](https://github.com/szvsw) for the web api implementation.
+
+Contact: reweber@mit.edu
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis*
 
 # Contents
 
+- [Introduction](#HypergraphResearchGeometryLibraryandAPI)
 - [Overview](#overview)
-- [How to use this repository](##How to use this repository)
-- [Sample files and demos](## Sample files and integration into CAD)
-- [Web API](#FloorPlanner API)
+- [How to use this repository](#Howtousethisrepository)
+- [Requirements](#Requirements)
+- [Sample files and demos](#SamplefilesandintegrationintoCAD)
+- [Web API](#FloorPlannerAPI)
 
 # Overview
 
@@ -41,7 +44,7 @@ The two sample scripts showcase how the hypergraph implementation can be used to
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
 *Sample Script 1: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan from a custom library can be selected to be applied to a target geometry. The research geometry implementation The CAD file defines boundary geometry, circulation access and façade as a series of lines.*
 
-![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
+![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%202%20Environmental%20Simulation.JPG)
 *Sample Script 2: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan is analyzed in terms of space, energy use and daylight.*
 
 
