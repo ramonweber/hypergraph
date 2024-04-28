@@ -41,10 +41,16 @@ The package development version is tested on a Windows operating system. While t
 # Hypergraph Visualizer
 
 Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as sample hypergraphs. A json file with geometry data can be found in `samples/sample_hypergraphs.ipynb`
-
-| ![input](img/sample_graph_original.JPG) | ![output](img/sample_graph.JPG) |
-|:--:|:--:|  # This centers the images in their respective columns
-| Original architectural floor plan | Resulting hypergraph from programmatic zones |
+<table>
+  <tr>
+    <td><img src="img/sample_graph_original.JPG" alt="Original architectural floor plan" width="400"/></td>
+    <td><img src="img/sample_graph.JPG" alt="Resulting hypergraph from programmatic zones" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center">Original architectural floor plan</td>
+    <td align="center">Resulting hypergraph from programmatic zones</td>
+  </tr>
+</table>
 
 # Sample files and demos
 
