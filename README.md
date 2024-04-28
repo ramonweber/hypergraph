@@ -34,13 +34,13 @@ The repository features 4 different ways to access the files
 
 The package development version is tested on a Windows operating system. While the .Net geometry library, as well as the hypergraph visualizer are platform independent, the sample files require a Windows operating system as well as the following software:
 
-- CAD environment [Rhino3d](https://rhino3d.com/ "rhino") (version7) 
+- CAD environment [Rhino3d](https://rhino3d.com/ "rhino") (version 7) 
 - Environmental simulation [Climate Studio](https://www.solemma.com/climatestudio "cs") (version 2.0.8742.29048)
 - Python `3.10.12` for the hypergraph visualizer
 
 # Hypergraph Visualizer
 
-Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as sample hypergraphs. A json file with geometry data can be found in `samples/sample_hypergraphs.ipynb`
+Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as hypergraphs. A json file with sample apartment geometry can be found in `samples/sample_hypergraphs.ipynb`
 <table>
   <tr>
     <td><img src="img/sample_graph_original.JPG" alt="Original architectural floor plan" width="300"/></td>
