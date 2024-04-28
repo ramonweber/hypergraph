@@ -38,6 +38,8 @@ The package development version is tested on a Windows operating system. While t
 - Environmental simulation [Climate Studio](https://www.solemma.com/climatestudio "cs") (version 2.0.8742.29048)
 - Python `3.10.12` for the hypergraph visualizer
 
+(Installation time ~10min)
+
 # Hypergraph Visualizer
 
 Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as hypergraphs. A json file with sample apartment geometry can be found in `samples/sample_hypergraphs.ipynb`
@@ -60,13 +62,17 @@ The three sample scripts showcase how the hypergraph implementation inside a CAD
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%200%20Load%20Hypergraph.JPG)
 *Sample Script 0: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a json file is used to load a floorplan from a hypergraph format.*
+(Run time < 2s at startup*)
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%201%20Transfer%20layout%20via%20hypergraph.JPG)
 *Sample Script 1: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan from a custom library can be selected to be applied to a target geometry. The research geometry implementation The CAD file defines boundary geometry, circulation access and façade as a series of lines.*
+(Run time < 3s at startup, ~ < 0.1s for geometry change*)
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%202%20Environmental%20Simulation.JPG)
 *Sample Script 2: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan is analyzed in terms of space, energy use and daylight.*
+(Run time ~ 30s for environmental simulation including daylight and energy*)
 
+**Run time measured on Standard Desktop PC (Windows OS, Intel(R) Core(TM) i7-6700k CPY @ 4.00 GHz, 64GB RAM, NVIDIA GeForce GTX 1080) 
 
 # FloorPlanner API
 
