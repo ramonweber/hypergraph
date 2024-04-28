@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Supabase.Storage</name>
+    </assembly>
+    <members>
+        <member name="P:Supabase.Storage.Bucket.Public">
+            <summary>
+            The visibility of the bucket. Public buckets don't require an authorization token to download objects,
+            but still require a valid token for all other operations. By default, buckets are private.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.Bucket.FileSizeLimit">
+             <summary>
+             Specifies the file size limit that this bucket can accept during upload.
+            
+             Expects a string value following a format like: '1kb', '50mb', '150kb', etc.
+             </summary>
+        </member>
+        <member name="P:Supabase.Storage.Bucket.AllowedMimes">
+             <summary>
+             Specifies the allowed mime types that this bucket can accept during upload.
+            
+             Expects a List of values such as: ['image/jpeg', 'image/png', etc]
+             </summary>
+        </member>
+        <member name="P:Supabase.Storage.BucketUpsertOptions.Public">
+            <summary>
+            The visibility of the bucket. Public buckets don't require an authorization token to download objects,
+            but still require a valid token for all other operations. By default, buckets are private.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.BucketUpsertOptions.FileSizeLimit">
+             <summary>
+             Specifies the file size limit that this bucket can accept during upload.
+            
+             Expects a string value following a format like: '1kb', '50mb', '150kb', etc.
+             </summary>
+        </member>
+        <member name="P:Supabase.Storage.BucketUpsertOptions.AllowedMimes">
+             <summary>
+             Specifies the allowed mime types that this bucket can accept during upload.
+            
+             Expects a List of values such as: ['image/jpeg', 'image/png', etc]
+             </summary>
+        </member>
+        <member name="M:Supabase.Storage.Client.From(System.String)">
+            <summary>
+            Perform a file operation in a bucket
+            </summary>
+            <param name="id">Bucket Id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Storage.ClientOptions">
+            <summary>
+            Options that can be passed into the Storage Client
+            </summary>
+        </member>
+        <member name="F:Supabase.Storage.ClientOptions.HttpUploadTimeout">
+            <summary>
+            The timespan to wait before an HTTP Upload Timesout
+            See: https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout?view=net-7.0
+            </summary>
+        </member>
+        <member name="F:Supabase.Storage.ClientOptions.HttpDownloadTimeout">
+            <summary>
+            The timespan to wait before an HTTP Upload Timesout
+            See: https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout?view=net-7.0
+            </summary>
+        </member>
+        <member name="F:Supabase.Storage.ClientOptions.HttpRequestTimeout">
+            <summary>
+            The timespan to wait before an HTTP Client request times out.
+            See: https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout?view=net-7.0
+            </summary>
+        </member>
+        <member name="T:Supabase.Storage.Extensions.HttpClientProgress">
+            <summary>
+            Adapted from: https://gist.github.com/dalexsoto/9fd3c5bdbe9f61a717d47c5843384d11
+            </summary>
+        </member>
+        <member name="M:Supabase.Storage.Extensions.TransformOptionsExtension.ToQueryCollection(Supabase.Storage.TransformOptions)">
+            <summary>
+            Transforms options into a NameValueCollecto to be used with a <see cref="T:System.UriBuilder"/>
+            </summary>
+            <param name="transform"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Supabase.Storage.FileObject.IsFolder">
+            <summary>
+            Flag representing if this object is a folder, all properties will be null but the name
+            </summary>
+        </member>
+        <member name="M:Supabase.Storage.Helpers.Initialize(Supabase.Storage.ClientOptions)">
+            <summary>
+            Initializes HttpClients with their appropriate timeouts. Called at the initialization of StorageBucketApi.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Supabase.Storage.Helpers.MakeRequest``1(System.Net.Http.HttpMethod,System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint and coerce into a model. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.Helpers.MakeRequest(System.Net.Http.HttpMethod,System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint.
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Supabase.Storage.SearchOptions.Limit">
+            <summary>
+            Number of files to be returned
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.SearchOptions.Offset">
+            <summary>
+            Starting position of query
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.SearchOptions.Search">
+            <summary>
+            The search string to filter files by
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.SearchOptions.SortBy">
+            <summary>
+            Column to sort by. Can be any colum inside of a <see cref="T:Supabase.Storage.FileObject"/>
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.StorageBucketApi.GetHeaders">
+            <summary>
+            Function that can be set to return dynamic headers.
+            
+            Headers specified in the constructor will ALWAYS take precendece over headers returned by this function.
+            </summary>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.ListBuckets">
+            <summary>
+            Retrieves the details of all Storage buckets within an existing product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.GetBucket(System.String)">
+            <summary>
+            Retrieves the details of an existing Storage bucket.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.CreateBucket(System.String,Supabase.Storage.BucketUpsertOptions)">
+            <summary>
+            Creates a new Storage bucket
+            </summary>
+            <param name="id"></param>
+            <param name="options"></param>
+            <returns>Bucket Id</returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.UpdateBucket(System.String,Supabase.Storage.BucketUpsertOptions)">
+            <summary>
+            Updates a Storage bucket
+            </summary>
+            <param name="id"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.EmptyBucket(System.String)">
+            <summary>
+            Removes all objects inside a single bucket.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageBucketApi.DeleteBucket(System.String)">
+            <summary>
+            Deletes an existing bucket. A bucket can't be deleted with existing objects inside it.
+            You must first <see cref="M:Supabase.Storage.StorageBucketApi.EmptyBucket(System.String)"/>
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.GetPublicUrl(System.String,Supabase.Storage.TransformOptions)">
+            <summary>
+            A simple convenience function to get the URL for an asset in a public bucket.If you do not want to use this function, you can construct the public URL by concatenating the bucket URL with the path to the asset.
+            This function does not verify if the bucket is public. If a public URL is created for a bucket which is not public, you will not be able to download the asset.
+            </summary>
+            <param name="path"></param>
+            <param name="transformOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.CreateSignedUrl(System.String,System.Int32,Supabase.Storage.TransformOptions)">
+            <summary>
+            Create signed url to download file without requiring permissions. This URL can be valid for a set number of seconds.
+            </summary>
+            <param name="path">The file path to be downloaded, including the current file name. For example `folder/image.png`.</param>
+            <param name="expiresIn">The number of seconds until the signed URL expires. For example, `60` for a URL which is valid for one minute.</param>
+            <param name="transformOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.CreateSignedUrls(System.Collections.Generic.List{System.String},System.Int32)">
+            <summary>
+            Create signed URLs to download files without requiring permissions. These URLs can be valid for a set number of seconds.
+            </summary>
+            <param name="paths">paths The file paths to be downloaded, including the current file names. For example [`folder/image.png`, 'folder2/image2.png'].</param>
+            <param name="expiresIn">The number of seconds until the signed URLs expire. For example, `60` for URLs which are valid for one minute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.List(System.String,Supabase.Storage.SearchOptions)">
+            <summary>
+            Lists all the files within a bucket.
+            </summary>
+            <param name="path"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Upload(System.String,System.String,Supabase.Storage.FileOptions,System.EventHandler{System.Single},System.Boolean)">
+            <summary>
+            Uploads a file to an existing bucket.
+            </summary>
+            <param name="localFilePath">File Source Path</param>
+            <param name="supabasePath">The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.</param>
+            <param name="options"></param>
+            <param name="onProgress"></param>
+            <param name="inferContentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Upload(System.Byte[],System.String,Supabase.Storage.FileOptions,System.EventHandler{System.Single},System.Boolean)">
+            <summary>
+            Uploads a byte array to an existing bucket.
+            </summary>
+            <param name="data"></param>
+            <param name="supabasePath">The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.</param>
+            <param name="options"></param>
+            <param name="onProgress"></param>
+            <param name="inferContentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.UploadToSignedUrl(System.String,Supabase.Storage.UploadSignedUrl,Supabase.Storage.FileOptions,System.EventHandler{System.Single},System.Boolean)">
+            <summary>
+            Uploads a file to using a pre-generated Signed Upload Url
+            </summary>
+            <param name="localFilePath">File Source Path</param>
+            <param name="signedUrl"></param>
+            <param name="options"></param>
+            <param name="onProgress"></param>
+            <param name="inferContentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.UploadToSignedUrl(System.Byte[],Supabase.Storage.UploadSignedUrl,Supabase.Storage.FileOptions,System.EventHandler{System.Single},System.Boolean)">
+            <summary>
+            Uploads a byte array using a pre-generated Signed Upload Url
+            </summary>
+            <param name="data"></param>
+            <param name="signedUrl"></param>
+            <param name="options"></param>
+            <param name="onProgress"></param>
+            <param name="inferContentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Update(System.String,System.String,Supabase.Storage.FileOptions,System.EventHandler{System.Single})">
+            <summary>
+            Replaces an existing file at the specified path with a new one.
+            </summary>
+            <param name="localFilePath">File source path.</param>
+            <param name="supabasePath">The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.</param>
+            <param name="options">HTTP headers.</param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Update(System.Byte[],System.String,Supabase.Storage.FileOptions,System.EventHandler{System.Single})">
+            <summary>
+            Replaces an existing file at the specified path with a new one.
+            </summary>
+            <param name="data"></param>
+            <param name="supabasePath">The relative file path. Should be of the format `folder/subfolder/filename.png`. The bucket must already exist before attempting to upload.</param>
+            <param name="options">HTTP headers.</param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Move(System.String,System.String)">
+            <summary>
+            Moves an existing file, optionally renaming it at the same time.
+            </summary>
+            <param name="fromPath">The original file path, including the current file name. For example `folder/image.png`.</param>
+            <param name="toPath">The new file path, including the new file name. For example `folder/image-copy.png`.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Download(System.String,System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a file from a private bucket. For public buckets, use <see cref="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})"/>
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="localPath"></param>
+            <param name="transformOptions"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Download(System.String,System.String,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a file from a private bucket. For public buckets, use <see cref="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})"/>
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="localPath"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Download(System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a byte array from a private bucket to be used programmatically. For public buckets <see cref="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})"/>
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="transformOptions"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Download(System.String,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a byte array from a private bucket to be used programmatically. For public buckets <see cref="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})"/>
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a public file to the filesystem. This method DOES NOT VERIFY that the file is actually public.
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="localPath"></param>
+            <param name="transformOptions"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.DownloadPublicFile(System.String,Supabase.Storage.TransformOptions,System.EventHandler{System.Single})">
+            <summary>
+            Downloads a byte array from a private bucket to be used programmatically. This method DOES NOT VERIFY that the file is actually public.
+            </summary>
+            <param name="supabasePath"></param>
+            <param name="transformOptions"></param>
+            <param name="onProgress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Remove(System.String)">
+            <summary>
+            Deletes file within the same bucket
+            </summary>
+            <param name="path">A path to delete, for example `folder/image.png`.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.Remove(System.Collections.Generic.List{System.String})">
+            <summary>
+            Deletes files within the same bucket
+            </summary>
+            <param name="paths">An array of files to be deletes, including the path and file name. For example [`folder/image.png`].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Storage.StorageFileApi.CreateUploadSignedUrl(System.String)">
+            <summary>
+            Creates an upload signed URL. Use it to upload a file straight to the bucket without credentials
+            </summary>
+            <param name="supabasePath">The file path, including the current file name. For example `folder/image.png`.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Storage.TransformOptions.ResizeType">
+            <summary>
+            The resize mode can be cover, contain or fill. Defaults to cover.
+            - Cover resizes the image to maintain it's aspect ratio while filling the entire width and height.
+            - Contain resizes the image to maintain it's aspect ratio while fitting the entire image within the width and height.
+            - Fill resizes the image to fill the entire width and height.If the object's aspect ratio does not match the width and height, the image will be stretched to fit.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.TransformOptions.Width">
+            <summary>
+            The width of the image in pixels.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.TransformOptions.Height">
+            <summary>
+            The height of the image in pixels.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.TransformOptions.Resize">
+            <summary>
+            The resize mode can be cover, contain or fill. Defaults to cover.
+            - Cover resizes the image to maintain it's aspect ratio while filling the entire width and height.
+            - Contain resizes the image to maintain it's aspect ratio while fitting the entire image within the width and height.
+            - Fill resizes the image to fill the entire width and height.If the object's aspect ratio does not match the width and height, the image will be stretched to fit.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.TransformOptions.Quality">
+            <summary>
+            Set the quality of the returned image, this is percentage based, default 80
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.TransformOptions.Format">
+             <summary>
+             Specify the format of the image requested.
+            
+             When using 'origin' we force the format to be the same as the original image,
+             bypassing automatic browser optimisation such as webp conversion
+             </summary>
+        </member>
+        <member name="T:Supabase.Storage.UploadSignedUrl">
+            <summary>
+            Represents a Generated Upload Signed Url - can be used to upload a file without needing a logged in token or user.
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.UploadSignedUrl.SignedUrl">
+            <summary>
+            The Full Signed Url
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.UploadSignedUrl.Token">
+            <summary>
+            The generated token
+            </summary>
+        </member>
+        <member name="P:Supabase.Storage.UploadSignedUrl.Key">
+            <summary>
+            The Key that can be uploaded to (the supabase filename)
+            </summary>
+        </member>
+    </members>
+</doc>

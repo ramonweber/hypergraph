@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Supabase.Functions</name>
+    </assembly>
+    <members>
+        <member name="T:Supabase.Functions.Client">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Functions.Client.GetHeaders">
+            <summary>
+            Function that can be set to return dynamic headers.
+            
+            Headers specified in the method parameters will ALWAYS take precedence over headers returned by this function.
+            </summary>
+        </member>
+        <member name="M:Supabase.Functions.Client.#ctor(System.String)">
+            <summary>
+            Initializes a functions client
+            </summary>
+            <param name="baseUrl"></param>
+        </member>
+        <member name="M:Supabase.Functions.Client.RawInvoke(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Returns an <see cref="T:System.Net.Http.HttpContent"/> response, allowing for coersion into Streams, Strings, and byte[]
+            </summary>
+            <param name="functionName">Function Name, will be appended to BaseUrl</param>
+            <param name="token">Anon Key.</param>
+            <param name="options">Options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Functions.Client.Invoke(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Invokes a function and returns the Text content of the response.
+            </summary>
+            <param name="functionName">Function Name, will be appended to BaseUrl</param>
+            <param name="token">Anon Key.</param>
+            <param name="options">Options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Functions.Client.Invoke``1(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Invokes a function and returns a JSON Deserialized object according to the supplied generic Type <typeparamref name="T"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="functionName">Function Name, will be appended to BaseUrl</param>
+            <param name="token">Anon Key.</param>
+            <param name="options">Options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Functions.Client.HandleRequest(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Internal request handling
+            </summary>
+            <param name="url"></param>
+            <param name="token"></param>
+            <param name="options"></param>
+            <returns></returns>
+            <exception cref="T:Supabase.Functions.Exceptions.FunctionsException"></exception>
+        </member>
+        <member name="T:Supabase.Functions.Client.InvokeFunctionOptions">
+            <summary>
+            Options that can be supplied to a function invocation.
+            
+            Note: If Headers.Authorization is set, it can be later overriden if a token is supplied in the method call.
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Client.InvokeFunctionOptions.Headers">
+            <summary>
+            Headers to be included on the request.
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Client.InvokeFunctionOptions.Body">
+            <summary>
+            Body of the Request
+            </summary>
+        </member>
+        <member name="T:Supabase.Functions.Exceptions.FailureHint">
+            <summary>
+            A hint as to why a request failed.
+            </summary>
+        </member>
+        <member name="T:Supabase.Functions.Exceptions.FailureHint.Reason">
+            <summary>
+            A failure reason
+            </summary>
+        </member>
+        <member name="F:Supabase.Functions.Exceptions.FailureHint.Reason.Unknown">
+            <summary>
+            An unknown reason
+            </summary>
+        </member>
+        <member name="F:Supabase.Functions.Exceptions.FailureHint.Reason.NotAuthorized">
+            <summary>
+            Request was not authorized
+            </summary>
+        </member>
+        <member name="F:Supabase.Functions.Exceptions.FailureHint.Reason.Internal">
+            <summary>
+            An internal error occurred, check your supabase logs.
+            </summary>
+        </member>
+        <member name="M:Supabase.Functions.Exceptions.FailureHint.DetectReason(Supabase.Functions.Exceptions.FunctionsException)">
+            <summary>
+            Attempts to detect a reason given an exception.
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Functions.Exceptions.FunctionsException">
+            <summary>
+            An Exception thrown within <see cref="N:Supabase.Functions"/>
+            </summary>
+        </member>
+        <member name="M:Supabase.Functions.Exceptions.FunctionsException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Functions.Exceptions.FunctionsException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Functions.Exceptions.FunctionsException.Response">
+            <summary>
+            The Http Response
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Exceptions.FunctionsException.Content">
+            <summary>
+            The Http response content
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Exceptions.FunctionsException.StatusCode">
+            <summary>
+            The Http Status code
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Exceptions.FunctionsException.Reason">
+            <summary>
+            A parsed reason for a given failure
+            </summary>
+        </member>
+        <member name="M:Supabase.Functions.Exceptions.FunctionsException.AddReason">
+            <summary>
+            Attempts to detect a reason for this exception
+            </summary>
+        </member>
+        <member name="T:Supabase.Functions.Interfaces.IFunctionsClient">
+            <summary>
+            Represents a contract for a Supabase Functions Client
+            </summary>
+        </member>
+        <member name="M:Supabase.Functions.Interfaces.IFunctionsClient.Invoke(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Invokes a function given a URL and access token. Returns the string content.
+            </summary>
+            <param name="url"></param>
+            <param name="token"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Functions.Interfaces.IFunctionsClient.Invoke``1(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Invokes a function given a URL and access token. Returns a typed response (should be a JSON.net parsable object)
+            </summary>
+            <param name="url"></param>
+            <param name="token"></param>
+            <param name="options"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Functions.Interfaces.IFunctionsClient.RawInvoke(System.String,System.String,Supabase.Functions.Client.InvokeFunctionOptions)">
+            <summary>
+            Invokes a function given a URL and access token. Returns the raw HTTP response.
+            </summary>
+            <param name="url"></param>
+            <param name="token"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Functions.Responses.BaseResponse">
+            <summary>
+            A wrapper class from which all Responses derive.
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Responses.BaseResponse.ResponseMessage">
+            <summary>
+            The response message
+            </summary>
+        </member>
+        <member name="P:Supabase.Functions.Responses.BaseResponse.Content">
+            <summary>
+            The response content.
+            </summary>
+        </member>
+    </members>
+</doc>

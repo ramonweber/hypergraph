@@ -1,0 +1,1526 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Supabase.Postgrest</name>
+    </assembly>
+    <members>
+        <member name="T:Postgrest.Attributes.ColumnAttribute">
+            <summary>
+            Used to map a C# property to a Postgrest Column.
+            </summary>
+            <example>
+            <code>
+            class User : BaseModel {
+                [ColumnName("firstName")]
+                public string FirstName {get; set;}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Postgrest.Attributes.ColumnAttribute.ColumnName">
+            <summary>
+            The name in postgres of this column.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ColumnAttribute.NullValueHandling">
+            <summary>
+            Specifies what should be serialized in the event this column's value is NULL
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ColumnAttribute.IgnoreOnInsert">
+            <summary>
+            If the performed query is an Insert or Upsert, should this value be ignored?
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ColumnAttribute.IgnoreOnUpdate">
+            <summary>
+            If the performed query is an Update, should this value be ignored?
+            </summary>
+        </member>
+        <member name="M:Postgrest.Attributes.ColumnAttribute.#ctor(System.String,Newtonsoft.Json.NullValueHandling,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.Attributes.PrimaryKeyAttribute">
+            <summary>
+            Used to map a C# property to a Postgrest PrimaryKey.
+            </summary>
+            <example>
+            <code>
+            class User : BaseModel {
+                [PrimaryKey("id")]
+                public string Id {get; set;}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Postgrest.Attributes.PrimaryKeyAttribute.ShouldInsert">
+            <summary>
+            Would be set to false in the event that the database handles the generation of this property.
+            </summary>
+        </member>
+        <member name="T:Postgrest.Attributes.ReferenceAttribute">
+            <summary>
+            Used to specify that a foreign key relationship exists in PostgreSQL
+            
+            See: https://postgrest.org/en/stable/api.html#resource-embedding
+            </summary>
+        </member>
+        <member name="T:Postgrest.Attributes.ReferenceAttribute.JoinType">
+            <summary>
+            Specifies the Join type on this reference. PostgREST only allows for a LEFT join and an INNER join.
+            </summary>
+        </member>
+        <member name="F:Postgrest.Attributes.ReferenceAttribute.JoinType.Inner">
+            <summary>
+            INNER JOIN: returns rows when there is a match on both the source and the referenced tables.
+            </summary>
+        </member>
+        <member name="F:Postgrest.Attributes.ReferenceAttribute.JoinType.Left">
+            <summary>
+            LEFT JOIN: returns all rows from the source table, even if there are no matches in the referenced table
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.Model">
+            <summary>
+            Type of the model referenced
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.PropertyName">
+            <summary>
+            Associated property name
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.TableName">
+            <summary>
+            Table name of model
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.Columns">
+            <summary>
+            Columns that exist on the model we will select from.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.IgnoreOnInsert">
+            <summary>
+            If the performed query is an Insert or Upsert, should this value be ignored? (DEFAULT TRUE)
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.IgnoreOnUpdate">
+            <summary>
+            If the performed query is an Update, should this value be ignored? (DEFAULT TRUE)
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.IncludeInQuery">
+            <summary>
+            If Reference should automatically be included in queries on this reference. (DEFAULT TRUE)
+            </summary>
+        </member>
+        <member name="P:Postgrest.Attributes.ReferenceAttribute.UseInnerJoin">
+            <summary>
+            As to whether the query will filter top-level rows.
+            
+            See: https://postgrest.org/en/stable/api.html#resource-embedding
+            </summary>
+        </member>
+        <member name="M:Postgrest.Attributes.ReferenceAttribute.#ctor(System.Type,Postgrest.Attributes.ReferenceAttribute.JoinType,System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>Establishes a reference between two tables</summary>
+            <param name="model">Model referenced</param>
+            <param name="includeInQuery">Should referenced be included in queries?</param>
+            <param name="ignoreOnInsert">Should reference data be excluded from inserts/upserts?</param>
+            <param name="ignoreOnUpdate">Should reference data be excluded from updates?</param>
+            <param name="joinType">Specifies the join type for this relationship</param>
+            <param name="propertyName"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Postgrest.Attributes.ReferenceAttribute.#ctor(System.Type,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>Establishes a reference between two tables</summary>
+            <param name="model">Model referenced</param>
+            <param name="includeInQuery">Should referenced be included in queries?</param>
+            <param name="ignoreOnInsert">Should reference data be excluded from inserts/upserts?</param>
+            <param name="ignoreOnUpdate">Should reference data be excluded from updates?</param>
+            <param name="useInnerJoin">As to whether the query will filter top-level rows.</param>
+            <param name="propertyName"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Postgrest.Attributes.ReferenceAttribute.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.Attributes.TableAttribute">
+            <summary>
+            Used to map a C# Model to a Postgres Table.
+            </summary>
+            <example>
+            <code>
+            [Table("user")]
+            class User : BaseModel {
+                [ColumnName("firstName")]
+                public string FirstName {get; set;}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:Postgrest.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Client.SerializerSettings(Postgrest.ClientOptions)">
+             <summary>
+             Custom Serializer resolvers and converters that will be used for encoding and decoding Postgrest JSON responses.
+            
+             By default, Postgrest seems to use a date format that C# and Newtonsoft do not like, so this initial
+             configuration handles that.
+             </summary>
+        </member>
+        <member name="P:Postgrest.Client.BaseUrl">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Client.Options">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Client.AddDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Client.RemoveDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Client.ClearDebugHandlers">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Client.GetHeaders">
+            <summary>
+            Function that can be set to return dynamic headers.
+            
+            Headers specified in the constructor options will ALWAYS take precedence over headers returned by this function.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Client.#ctor(System.String,Postgrest.ClientOptions)">
+            <summary>
+            Should be the first call to this class to initialize a connection with a Postgrest API Server
+            </summary>
+            <param name="baseUrl">Api Endpoint (ex: "http://localhost:8000"), no trailing slash required.</param>
+            <param name="options">Optional client configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Client.Table``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Client.Rpc(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.ClientOptions">
+            <summary>
+            Options that can be passed to the Client configuration
+            </summary>
+        </member>
+        <member name="T:Postgrest.Constants.Operator">
+            <summary>
+            See: https://postgrest.org/en/v7.0.0/api.html?highlight=operators#operators
+            </summary>
+        </member>
+        <member name="T:Postgrest.Constants.NullPosition">
+            <summary>
+            See: https://postgrest.org/en/v7.0.0/api.html?highlight=nulls%20first#ordering
+            </summary>
+        </member>
+        <member name="T:Postgrest.Constants.CountType">
+            <summary>
+            See: https://postgrest.org/en/v7.0.0/api.html?highlight=count#estimated-count
+            </summary>
+        </member>
+        <member name="T:Postgrest.Converters.DateTimeConverter">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.DateTimeConverter.CanConvert(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Converters.DateTimeConverter.CanWrite">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.DateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.DateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.Converters.IntArrayConverter">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.IntArrayConverter.CanConvert(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Converters.IntArrayConverter.CanRead">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.IntArrayConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Converters.IntArrayConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.Converters.RangeConverter">
+            <summary>
+            Used by Newtonsoft.Json to convert a C# range into a Postgrest range.
+            </summary>
+        </member>
+        <member name="T:Postgrest.Debugger">
+            <summary>
+            A Singleton used for debug notifications
+            </summary>
+        </member>
+        <member name="P:Postgrest.Debugger.Instance">
+            <summary>
+            Returns the Singleton Instance.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Debugger.AddDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Adds a debug listener
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Debugger.RemoveDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Removes a debug handler.
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Debugger.ClearDebugHandlers">
+            <summary>
+            Clears debug handlers.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Debugger.Log(System.Object,System.String,Postgrest.Exceptions.PostgrestException)">
+            <summary>
+            Notifies debug listeners.
+            </summary>
+            <param name="sender"></param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Postgrest.Exceptions.FailureHint">
+            <summary>
+            https://postgrest.org/en/v10.2/errors.html?highlight=exception#http-status-codes
+            </summary>
+        </member>
+        <member name="T:Postgrest.Exceptions.PostgrestException">
+            <summary>
+            Errors from Postgrest are wrapped by this exception
+            </summary>
+        </member>
+        <member name="M:Postgrest.Exceptions.PostgrestException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Exceptions.PostgrestException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Exceptions.PostgrestException.Response">
+            <summary>
+            The response object from Postgrest
+            </summary>
+        </member>
+        <member name="P:Postgrest.Exceptions.PostgrestException.Content">
+            <summary>
+            The content of the response object from Postgrest
+            </summary>
+        </member>
+        <member name="P:Postgrest.Exceptions.PostgrestException.StatusCode">
+            <summary>
+            The HTTP status code of the response object from Postgrest
+            </summary>
+        </member>
+        <member name="P:Postgrest.Exceptions.PostgrestException.Reason">
+            <summary>
+            Postgres client's best effort at decoding the error from the GoTrue server.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Exceptions.PostgrestException.AddReason">
+            <summary>
+            Attempts to decode the error from the GoTrue server.
+            </summary>
+        </member>
+        <member name="T:Postgrest.Extensions.EnumExtensions">
+            <summary>
+            Adds functionality to get a typed Attribute attached to an enum value.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Extensions.EnumExtensions.GetAttribute``1(System.Enum)">
+            <summary>
+            Gets a typed Attribute attached to an enum value.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Extensions.RangeExtensions">
+            <summary>
+            Adds functionality to transform a C# Range to a Postgrest String.
+            
+            <see>
+                <cref>https://www.postgresql.org/docs/14/rangetypes.html</cref>
+            </see>
+            </summary>
+        </member>
+        <member name="M:Postgrest.Extensions.RangeExtensions.ToPostgresString(Postgrest.IntRange)">
+            <summary>
+            Transforms a C# Range to a Postgrest String.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Extensions.UriExtensions">
+            <summary>
+            Pull the instance info out of the Uri
+            </summary>
+        </member>
+        <member name="M:Postgrest.Extensions.UriExtensions.GetInstanceUrl(System.Uri)">
+            <summary>
+            Pull the instance info out of the Uri
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Helpers.MakeRequest``1(Postgrest.ClientOptions,System.Net.Http.HttpMethod,System.String,Newtonsoft.Json.JsonSerializerSettings,System.Object,System.Collections.Generic.Dictionary{System.String,System.String},System.Func{System.Collections.Generic.Dictionary{System.String,System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint and coerce into a model. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="clientOptions"></param>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <param name="serializerSettings"></param>
+            <param name="getHeaders"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Helpers.MakeRequest(Postgrest.ClientOptions,System.Net.Http.HttpMethod,System.String,Newtonsoft.Json.JsonSerializerSettings,System.Object,System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint.
+            </summary>
+            <param name="clientOptions"></param>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <param name="serializerSettings"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Helpers.PrepareRequestHeaders(System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},Postgrest.ClientOptions,System.Int32,System.Int32)">
+            <summary>
+            Prepares the request with appropriate HTTP headers expected by Postgrest.
+            </summary>
+            <param name="method"></param>
+            <param name="headers"></param>
+            <param name="options"></param>
+            <param name="rangeFrom"></param>
+            <param name="rangeTo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Interfaces.IPostgrestClient">
+            <summary>
+            Client interface for Postgrest
+            </summary>
+        </member>
+        <member name="P:Postgrest.Interfaces.IPostgrestClient.BaseUrl">
+            <summary>
+            API Base Url for subsequent calls.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Interfaces.IPostgrestClient.Options">
+            <summary>
+            The Options <see cref="T:Postgrest.Client"/> was initialized with.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestClient.AddDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Adds a debug handler
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestClient.RemoveDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Removes a debug handler
+            </summary>
+            /// <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestClient.ClearDebugHandlers">
+            <summary>
+            Clears debug handlers
+            </summary>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestClient.Rpc(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Perform a stored procedure call.
+            </summary>
+            <param name="procedureName">The function name to call</param>
+            <param name="parameters">The parameters to pass to the function call</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestClient.Table``1">
+            <summary>
+            Returns a Table Query Builder instance for a defined model - representative of `USE $TABLE`
+            </summary>
+            <typeparam name="T">Custom Model derived from `BaseModel`</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Interfaces.IPostgrestDebugger">
+            <summary>
+            Interface for getting debug info from Postgrest
+            </summary>
+        </member>
+        <member name="T:Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestDebugger.AddDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Adds a debug handler
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestDebugger.RemoveDebugHandler(Postgrest.Interfaces.IPostgrestDebugger.DebugEventHandler)">
+            <summary>
+            Removes a debug handler
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestDebugger.ClearDebugHandlers">
+            <summary>
+            Clears debug handlers
+            </summary>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestDebugger.Log(System.Object,System.String,Postgrest.Exceptions.PostgrestException)">
+            <summary>
+            Logs a message
+            </summary>
+            <param name="sender"></param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Postgrest.Interfaces.IPostgrestTable`1">
+            <summary>
+            Client interface for Postgrest
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Postgrest.Interfaces.IPostgrestTable`1.BaseUrl">
+            <summary>
+            API Base Url for subsequent calls.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Interfaces.IPostgrestTable`1.TableName">
+            <summary>
+            Name of the Table parsed by the Model.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.And(System.Collections.Generic.List{Postgrest.QueryFilter})">
+            <summary>
+            Adds an AND Filter to the current query args.
+            </summary>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Clear">
+            <summary>
+            Clears currently defined query values.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Columns(System.String[])">
+            <summary>
+            By using the columns query parameter it’s possible to specify the payload keys that will be inserted and ignore the rest of the payload.
+            
+            The rest of the JSON keys will be ignored.
+            Using this also has the side-effect of being more efficient for Bulk Insert since PostgREST will not process the JSON and it’ll send it directly to PostgreSQL.
+            
+            See: https://postgrest.org/en/stable/api.html#specifying-columns
+            </summary>
+            <param name="columns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Columns(System.Linq.Expressions.Expression{System.Func{`0,System.Object[]}})">
+            <summary>
+            By using the columns query parameter it’s possible to specify the payload keys that will be inserted and ignore the rest of the payload.
+            
+            The rest of the JSON keys will be ignored.
+            Using this also has the side-effect of being more efficient for Bulk Insert since PostgREST will not process the JSON and it’ll send it directly to PostgreSQL.
+            
+            See: https://postgrest.org/en/stable/api.html#specifying-columns
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Count(Postgrest.Constants.CountType,System.Threading.CancellationToken)">
+             <summary>
+             Returns ONLY a count from the specified query.
+            
+             See: https://postgrest.org/en/v7.0.0/api.html?highlight=count
+             </summary>
+             <param name="type">The kind of count.</param>
+             <param name="cancellationToken"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Delete(Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes a delete request using the defined query params on the current instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Delete(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes a delete request using the model's primary key as the filter for the request.
+            </summary>
+            <param name="model"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Filter(System.String,Postgrest.Constants.Operator,System.Object)">
+            <summary>
+            Add a Filter to a query request
+            </summary>
+            <param name="columnName">Column Name in Table.</param>
+            <param name="op">Operation to perform.</param>
+            <param name="criterion">Value to filter with, must be a `string`, `List&lt;object&gt;`, `Dictionary&lt;string, object&gt;`, `FullTextSearchConfig`, or `Range`</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Filter(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Postgrest.Constants.Operator,System.Object)">
+            <summary>
+            Add a filter to a query request using a predicate to select column.
+            </summary>
+            <param name="predicate">Expects a columns from the Model to be returned</param>
+            <param name="op">Operation to perform.</param>
+            <param name="criterion">Value to filter with, must be a `string`, `List&lt;object&gt;`, `Dictionary&lt;string, object&gt;`, `FullTextSearchConfig`, or `Range`</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Get(System.Threading.CancellationToken)">
+            <summary>
+            Executes the query using the defined filters on the current instance.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Insert(System.Collections.Generic.ICollection{`0},Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes a BULK INSERT query using the defined query params on the current instance.
+            </summary>
+            <param name="models"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns>A typed model response from the database.</returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Insert(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes an INSERT query using the defined query params on the current instance.
+            </summary>
+            <param name="model"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns>A typed model response from the database.</returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Limit(System.Int32,System.String)">
+            <summary>
+            Sets a limit with an optional foreign table reference. 
+            </summary>
+            <param name="limit"></param>
+            <param name="foreignTableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Match(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Finds all rows whose columns match the specified `query` object.
+            </summary>
+            <param name="query">The object to filter with, with column names as keys mapped to their filter values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Match(`0)">
+            <summary>
+            Fills in query parameters based on a given model's primary key(s).
+            </summary>
+            <param name="model">A model with a primary key column</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Not(Postgrest.QueryFilter)">
+            <summary>
+            Adds a NOT filter to the current query args.
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Not(System.String,Postgrest.Constants.Operator,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Adds a NOT filter to the current query args.
+            </summary>
+            <param name="columnName"></param>
+            <param name="op"></param>
+            <param name="criteria"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Not(System.String,Postgrest.Constants.Operator,System.Collections.Generic.List{System.Object})">
+            <summary>
+            Adds a NOT filter to the current query args.
+            Allows queries like:
+            <code>
+            await client.Table&lt;User&gt;().Not("status", Operators.In, new List&lt;string&gt; {"AWAY", "OFFLINE"}).Get();
+            </code>
+            </summary>
+            <param name="columnName"></param>
+            <param name="op"></param>
+            <param name="criteria"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Not(System.String,Postgrest.Constants.Operator,System.String)">
+             <summary>
+             Adds a NOT filter to the current query args.
+            
+             Allows queries like:
+             <code>
+             await client.Table&lt;User&gt;().Not("status", Operators.Equal, "OFFLINE").Get();
+             </code>
+             </summary>
+             <param name="columnName"></param>
+             <param name="op"></param>
+             <param name="criterion"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Offset(System.Int32,System.String)">
+            <summary>
+            Sets an offset with an optional foreign table reference.
+            </summary>
+            <param name="offset"></param>
+            <param name="foreignTableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.OnConflict(System.String)">
+            <summary>
+            By specifying the onConflict query parameter, you can make UPSERT work on a column(s) that has a UNIQUE constraint.
+            </summary>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.OnConflict(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Set an onConflict query parameter for UPSERTing on a column that has a UNIQUE constraint using a linq predicate.
+            </summary>
+            <param name="predicate">Expects a column from the model to be returned.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Or(System.Collections.Generic.List{Postgrest.QueryFilter})">
+            <summary>
+            Adds a OR Filter to the current query args.
+            </summary>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Order(System.String,Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <summary>
+            Adds an ordering to the current query args.
+            
+            NOTE: If multiple orderings are required, chain this function with another call to <see>
+                <cref>Order(Expression{Func{T,object}},Ordering,NullPosition)</cref>
+            </see>
+            .
+            </summary>
+            <param name="column">Column Name</param>
+            <param name="ordering"></param>
+            <param name="nullPosition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Order(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <summary>
+            Adds an ordering to the current query args using a predicate function.
+            
+            NOTE: If multiple orderings are required, chain this function with another call to <see>
+                <cref>Order(Expression{Func{T,object}},Ordering,NullPosition)</cref>
+            </see>
+            .
+            </summary>
+            <param name="predicate"></param>
+            <param name="ordering">>Expects a columns from the Model to be returned</param>
+            <param name="nullPosition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Order(System.String,System.String,Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <summary>
+            Adds an ordering to the current query args.
+            
+            NOTE: If multiple orderings are required, chain this function with another call to <see>
+                <cref>Order(Expression{Func{T,object}},Ordering,NullPosition)</cref>
+            </see>
+            .
+            </summary>
+            <param name="foreignTable"></param>
+            <param name="column"></param>
+            <param name="ordering"></param>
+            <param name="nullPosition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Range(System.Int32)">
+            <summary>
+            Sets a FROM range, similar to a `StartAt` query.
+            </summary>
+            <param name="from"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Range(System.Int32,System.Int32)">
+            <summary>
+            Sets a bounded range to the current query.
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Select(System.String)">
+            <summary>
+            Select columns for query. 
+            </summary>
+            <param name="columnQuery"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Select(System.Linq.Expressions.Expression{System.Func{`0,System.Object[]}})">
+            <summary>
+            Select columns using a predicate function.
+            
+            For example: 
+            	`Table&lt;Movie&gt;().Select(x => new[] { x.Id, x.Name, x.CreatedAt }).Get();`
+            </summary>
+            <param name="predicate">Expects an array of columns from the Model to be returned.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Filter a query based on a predicate function. 
+            
+            Note: Chaining multiple <see cref="M:Postgrest.Interfaces.IPostgrestTable`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})"/> calls will
+            be parsed as an "AND" query.
+            
+            Examples:
+            	`Table&lt;Movie&gt;().Where(x =&gt; x.Name == "Top Gun").Get();`
+            	`Table&lt;Movie&gt;().Where(x =&gt; x.Name == "Top Gun" || x.Name == "Mad Max").Get();`
+            	`Table&lt;Movie&gt;().Where(x =&gt; x.Name.Contains("Gun")).Get();`
+            	`Table&lt;Movie&gt;().Where(x =&gt; x.CreatedAt &lt;= new DateTime(2022, 08, 21)).Get();`
+            	`Table&lt;Movie&gt;().Where(x =&gt; x.Id > 5 &amp;&amp; x.Name.Contains("Max")).Get();`
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Single(System.Threading.CancellationToken)">
+            <summary>
+            Executes a query that expects to have a single object returned, rather than returning list of models
+            it will return a single model.
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Set(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <summary>
+            Specifies a key and value to be updated. Should be combined with filters/where clauses.
+            
+            Can be called multiple times to set multiple values.
+            </summary>
+            <param name="keySelector"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Set(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.KeyValuePair{System.Object,System.Object}}})">
+            <summary>
+            Specifies a KeyValuePair to be updated. Should be combined with filters/where clauses.
+            
+            Can be called multiple times to set multiple values.
+            </summary>
+            <param name="keyValuePairExpression"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Update(Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Calls an Update function after `Set` has been called.
+            </summary>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Update(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes an UPDATE query using the defined query params on the current instance.
+            </summary>
+            <param name="model"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns>A typed response from the database.</returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Upsert(System.Collections.Generic.ICollection{`0},Postgrest.QueryOptions,System.Threading.CancellationToken)">
+             <summary>
+             Executes an UPSERT query using the defined query params on the current instance.
+            
+             By default the new record is returned. Set QueryOptions.ReturnType to Minimal if you don't need this value.
+             By specifying the QueryOptions.OnConflict parameter, you can make UPSERT work on a column(s) that has a UNIQUE constraint.
+             QueryOptions.DuplicateResolution.IgnoreDuplicates Specifies if duplicate rows should be ignored and not inserted.
+             </summary>
+             <param name="model"></param>
+             <param name="options"></param>
+             <param name="cancellationToken"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Postgrest.Interfaces.IPostgrestTable`1.Upsert(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Executes an UPSERT query using the defined query params on the current instance.
+            
+            By default the new record is returned. Set QueryOptions.ReturnType to Minimal if you don't need this value.
+            By specifying the QueryOptions.OnConflict parameter, you can make UPSERT work on a column(s) that has a UNIQUE constraint.
+            QueryOptions.DuplicateResolution.IgnoreDuplicates Specifies if duplicate rows should be ignored and not inserted.
+            </summary>
+            <param name="model"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Index">
+            <summary>Represent a type can be used to index a collection either from the start or the end.</summary>
+            <remarks>
+            Index is used by the C# compiler to support the new index syntax
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 } ;
+            int lastElement = someArray[^1]; // lastElement = 5
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Postgrest.Index.#ctor(System.Int32,System.Boolean)">
+            <summary>Construct an Index using a value and indicating if the index is from the start or from the end.</summary>
+            <param name="value">The index value. it has to be zero or positive number.</param>
+            <param name="fromEnd">Indicating if the index is from the start or from the end.</param>
+            <remarks>
+            If the Index constructed from the end, index value 1 means pointing at the last element and index value 0 means pointing at beyond last element.
+            </remarks>
+        </member>
+        <member name="P:Postgrest.Index.Start">
+            <summary>Create an Index pointing at first element.</summary>
+        </member>
+        <member name="P:Postgrest.Index.End">
+            <summary>Create an Index pointing at beyond last element.</summary>
+        </member>
+        <member name="M:Postgrest.Index.FromStart(System.Int32)">
+            <summary>Create an Index from the start at the position indicated by the value.</summary>
+            <param name="value">The index value from the start.</param>
+        </member>
+        <member name="M:Postgrest.Index.FromEnd(System.Int32)">
+            <summary>Create an Index from the end at the position indicated by the value.</summary>
+            <param name="value">The index value from the end.</param>
+        </member>
+        <member name="P:Postgrest.Index.Value">
+            <summary>Returns the index value.</summary>
+        </member>
+        <member name="P:Postgrest.Index.IsFromEnd">
+            <summary>Indicates whether the index is from the start or the end.</summary>
+        </member>
+        <member name="M:Postgrest.Index.GetOffset(System.Int32)">
+            <summary>Calculate the offset from the start using the giving collection length.</summary>
+            <param name="length">The length of the collection that the Index will be used with. length has to be a positive value</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter and the returned offset value against negative values.
+            we don't validate either the returned offset is greater than the input length.
+            It is expected Index will be used with collections which always have non negative length/count. If the returned offset is negative and
+            then used to index a collection will get out of range exception which will be same affect as the validation.
+            </remarks>
+        </member>
+        <member name="M:Postgrest.Index.Equals(System.Object)">
+            <summary>Indicates whether the current Index object is equal to another object of the same type.</summary>
+            <param name="value">An object to compare with this object</param>
+        </member>
+        <member name="M:Postgrest.Index.Equals(Postgrest.Index)">
+            <summary>Indicates whether the current Index object is equal to another Index object.</summary>
+            <param name="other">An object to compare with this object</param>
+        </member>
+        <member name="M:Postgrest.Index.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:Postgrest.Index.op_Implicit(System.Int32)~Postgrest.Index">
+            <summary>Converts integer number to an Index.</summary>
+        </member>
+        <member name="M:Postgrest.Index.ToString">
+            <summary>Converts the value of the current Index object to its equivalent string representation.</summary>
+        </member>
+        <member name="T:Postgrest.IntRange">
+            <summary>Represent a range has start and end indexes.</summary>
+            <remarks>
+            Range is used by the C# compiler to support the range syntax.
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 };
+            int[] subArray1 = someArray[0..2]; // { 1, 2 }
+            int[] subArray2 = someArray[1..^0]; // { 2, 3, 4, 5 }
+            </code>
+            </remarks>
+        </member>
+        <member name="P:Postgrest.IntRange.Start">
+            <summary>Represent the inclusive start index of the Range.</summary>
+        </member>
+        <member name="P:Postgrest.IntRange.End">
+            <summary>Represent the exclusive end index of the Range.</summary>
+        </member>
+        <member name="M:Postgrest.IntRange.#ctor(Postgrest.Index,Postgrest.Index)">
+            <summary>Construct a Range object using the start and end indexes.</summary>
+            <param name="start">Represent the inclusive start index of the range.</param>
+            <param name="end">Represent the exclusive end index of the range.</param>
+        </member>
+        <member name="M:Postgrest.IntRange.Equals(System.Object)">
+            <summary>Indicates whether the current Range object is equal to another object of the same type.</summary>
+            <param name="value">An object to compare with this object</param>
+        </member>
+        <member name="M:Postgrest.IntRange.Equals(Postgrest.IntRange)">
+            <summary>Indicates whether the current Range object is equal to another Range object.</summary>
+            <param name="other">An object to compare with this object</param>
+        </member>
+        <member name="M:Postgrest.IntRange.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:Postgrest.IntRange.ToString">
+            <summary>Converts the value of the current Range object to its equivalent string representation.</summary>
+        </member>
+        <member name="M:Postgrest.IntRange.StartAt(Postgrest.Index)">
+            <summary>Create a Range object starting from start index to the end of the collection.</summary>
+        </member>
+        <member name="M:Postgrest.IntRange.EndAt(Postgrest.Index)">
+            <summary>Create a Range object starting from first element in the collection to the end Index.</summary>
+        </member>
+        <member name="P:Postgrest.IntRange.All">
+            <summary>Create a Range object starting from first element to the end.</summary>
+        </member>
+        <member name="M:Postgrest.IntRange.GetOffsetAndLength(System.Int32)">
+            <summary>Calculate the start offset and length of range object using a collection length.</summary>
+            <param name="length">The length of the collection that the range will be used with. length has to be a positive value.</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter against negative values.
+            It is expected Range will be used with collections which always have non negative length/count.
+            We validate the range is inside the length scope though.
+            </remarks>
+        </member>
+        <member name="T:Postgrest.Linq.SelectExpressionVisitor">
+            <summary>
+            Helper class for parsing Select linq queries.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Linq.SelectExpressionVisitor.Columns">
+            <summary>
+            The columns that have been selected from this linq expression.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Linq.SelectExpressionVisitor.VisitNewArray(System.Linq.Expressions.NewArrayExpression)">
+            <summary>
+            The root call that will be looped through to populate <see cref="P:Postgrest.Linq.SelectExpressionVisitor.Columns"/>.
+            
+            Called like: `Table&lt;Movies&gt;().Select(x => new[] { x.Id, x.Name, x.CreatedAt }).Get()`
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.SelectExpressionVisitor.VisitMember(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            A Member Node, representing a property on a BaseModel.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.SelectExpressionVisitor.VisitUnary(System.Linq.Expressions.UnaryExpression)">
+            <summary>
+            A Unary Node, delved into to represent a property on a BaseModel.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.SelectExpressionVisitor.GetColumnFromMemberExpression(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Gets a column name from property based on it's supplied attributes.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Linq.SetExpressionVisitor">
+            <summary>
+            Helper class for parsing Set linq queries.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Linq.SetExpressionVisitor.Column">
+            <summary>
+            The column that have been selected from this linq expression.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Linq.SetExpressionVisitor.ExpectedType">
+            <summary>
+            The Column's type that value should be checked against.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Linq.SetExpressionVisitor.Value">
+            <summary>
+            Value to be updated.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Linq.SetExpressionVisitor.VisitUnary(System.Linq.Expressions.UnaryExpression)">
+            <summary>
+            A Unary Node, delved into to represent a property on a BaseModel.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.SetExpressionVisitor.VisitMember(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            A Member Node, representing a property on a BaseModel.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.SetExpressionVisitor.VisitNew(System.Linq.Expressions.NewExpression)">
+            <summary>
+            Called when visiting a the expected new KeyValuePair().
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Postgrest.Linq.SetExpressionVisitor.GetColumnFromMemberExpression(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Gets a column name from property based on it's supplied attributes.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Linq.WhereExpressionVisitor">
+            <summary>
+            Helper class for parsing Where linq queries.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Linq.WhereExpressionVisitor.Filter">
+            <summary>
+            The filter resulting from this Visitor, capable of producing nested filters.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.VisitBinary(System.Linq.Expressions.BinaryExpression)">
+            <summary>
+            An entry point that will be used to populate <see cref="P:Postgrest.Linq.WhereExpressionVisitor.Filter"/>.
+            
+            Invoked like: 
+            	`Table&lt;Movies&gt;().Where(x => x.Name == "Top Gun").Get();`
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            Called when evaluating a method 
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.HandleConstantExpression(System.String,Postgrest.Constants.Operator,System.Linq.Expressions.ConstantExpression)">
+            <summary>
+            A constant expression parser (i.e. x => x.Id == 5 &lt;- where '5' is the constant)
+            </summary>
+            <param name="column"></param>
+            <param name="op"></param>
+            <param name="constantExpression"></param>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.HandleMemberExpression(System.String,Postgrest.Constants.Operator,System.Linq.Expressions.MemberExpression)">
+            <summary>
+            A member expression parser (i.e. => x.Id == Example.Id &lt;- where both `x.Id` and `Example.Id` are parsed as 'members')
+            </summary>
+            <param name="column"></param>
+            <param name="op"></param>
+            <param name="memberExpression"></param>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.HandleUnaryExpression(System.String,Postgrest.Constants.Operator,System.Linq.Expressions.UnaryExpression)">
+            <summary>
+            A unary expression parser (i.e. => x.Id == 1 &lt;- where both `1` is considered unary)
+            </summary>
+            <param name="column"></param>
+            <param name="op"></param>
+            <param name="unaryExpression"></param>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.HandleNewExpression(System.String,Postgrest.Constants.Operator,System.Linq.Expressions.NewExpression)">
+            <summary>
+            An instantiated class parser (i.e. x => x.CreatedAt &lt;= new DateTime(2022, 08, 20) &lt;- where `new DateTime(...)` is an instantiated expression.
+            </summary>
+            <param name="column"></param>
+            <param name="op"></param>
+            <param name="newExpression"></param>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.GetColumnFromMemberExpression(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Gets a column name (postgrest) from a Member Expression (used on BaseModel)
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.GetMemberExpressionValue(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Get the value from a MemberExpression, which includes both fields and properties.
+            </summary>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.GetMappedOperator(System.Linq.Expressions.Expression)">
+            <summary>
+            Creates map between linq <see cref="T:System.Linq.Expressions.ExpressionType"/> and <see cref="T:Postgrest.Constants.Operator"/>
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Linq.WhereExpressionVisitor.GetArgumentValues(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            Gets arguments from a method call expression, (i.e. x => x.Name.Contains("Top")) &lt;- where `Top` is the argument on the called method `Contains`
+            </summary>
+            <param name="methodCall"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Postgrest.Models.BaseModel">
+            <summary>
+            Abstract class that must be implemented by C# Postgrest Models.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Models.BaseModel.PrimaryKey">
+            <summary>
+            Gets the values of the PrimaryKey columns (there can be multiple) on a model's instance as defined by the [PrimaryKey] attributes on a property on the model.
+            </summary>
+        </member>
+        <member name="T:Postgrest.PostgrestContractResolver">
+            <summary>
+            A custom resolver that handles mapping column names and property names as well
+            as handling the conversion of Postgrest Ranges to a C# `Range`.
+            </summary>
+        </member>
+        <member name="M:Postgrest.PostgrestContractResolver.SetState(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the state of the contract resolver to either insert, update, or upsert.
+            </summary>
+            <param name="isInsert"></param>
+            <param name="isUpdate"></param>
+            <param name="isUpsert"></param>
+        </member>
+        <member name="M:Postgrest.PostgrestContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.QueryFilter">
+            <inheritdoc />
+        </member>
+        <member name="F:Postgrest.QueryFilter.NullVal">
+            <summary>
+            String value to be substituted for a null criterion
+            </summary>
+        </member>
+        <member name="P:Postgrest.QueryFilter.Property">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.QueryFilter.Op">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.QueryFilter.Criteria">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(System.String,Postgrest.Constants.Operator,System.Object)">
+            <summary>
+            Contractor to use single value filtering.
+            </summary>
+            <param name="property">Column name</param>
+            <param name="op">Operation: And, Equals, GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, NotEqual, Is, Adjacent, Not, Like, ILike</param>
+            <param name="criteria"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(System.String,Postgrest.Constants.Operator,System.Collections.Generic.List{System.Object})">
+            <summary>
+            Constructor to use multiple values as for filtering.
+            </summary>
+            <param name="property">Column name</param>
+            <param name="op">Operation: In, Contains, ContainedIn, or Overlap</param>
+            <param name="criteria"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(System.String,Postgrest.Constants.Operator,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Constructor to use multiple values as for filtering (using a dictionary).
+            </summary>
+            <param name="property">Column name</param>
+            <param name="op">Operation: In, Contains, ContainedIn, or Overlap</param>
+            <param name="criteria"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(System.String,Postgrest.Constants.Operator,Postgrest.FullTextSearchConfig)">
+            <summary>
+            Constructor for Full Text Search.
+            </summary>
+            <param name="property">Column Name</param>
+            <param name="op">Operation: FTS, PHFTS, PLFTS, WFTS</param>
+            <param name="fullTextSearchConfig"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(System.String,Postgrest.Constants.Operator,Postgrest.IntRange)">
+            <summary>
+            Constructor for Range Queries.
+            </summary>
+            <param name="property"></param>
+            <param name="op">Operator: Overlap, StrictlyLeft, StrictlyRight, NotRightOf, NotLeftOf, Adjacent</param>
+            <param name="range"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(Postgrest.Constants.Operator,System.Collections.Generic.List{Postgrest.QueryFilter})">
+            <summary>
+            Constructor to enable `AND` and `OR` Queries by allowing nested QueryFilters.
+            </summary>
+            <param name="op">Operation: And, Or</param>
+            <param name="filters"></param>
+        </member>
+        <member name="M:Postgrest.QueryFilter.#ctor(Postgrest.Constants.Operator,Postgrest.QueryFilter)">
+            <summary>
+            Constructor to enable `NOT` functionality
+            </summary>
+            <param name="op">Operation: Not.</param>
+            <param name="filter"></param>
+        </member>
+        <member name="T:Postgrest.FullTextSearchConfig">
+            <summary>
+            Configuration Object for Full Text Search.
+            API Reference: http://postgrest.org/en/v7.0.0/api.html?highlight=full%20text%20search#full-text-search
+            </summary>
+        </member>
+        <member name="P:Postgrest.FullTextSearchConfig.QueryText">
+            <summary>
+            Query Text
+            </summary>
+        </member>
+        <member name="P:Postgrest.FullTextSearchConfig.Config">
+            <summary>
+            Defaults to english
+            </summary>
+        </member>
+        <member name="M:Postgrest.FullTextSearchConfig.#ctor(System.String,System.String)">
+            <summary>
+            Constructor for Full Text Search.
+            </summary>
+            <param name="queryText"></param>
+            <param name="config"></param>
+        </member>
+        <member name="P:Postgrest.QueryOptions.Returning">
+            <summary>
+            By default the new record is returned. Set this to 'Minimal' if you don't need this value.
+            </summary>
+        </member>
+        <member name="P:Postgrest.QueryOptions.DuplicateResolution">
+            <summary>
+            Specifies if duplicate rows should be ignored and not inserted.
+            </summary>
+        </member>
+        <member name="P:Postgrest.QueryOptions.Count">
+            <summary>
+            Count algorithm to use to count rows in a table.
+            </summary>
+        </member>
+        <member name="P:Postgrest.QueryOptions.Upsert">
+            <summary>
+            If the record should be upserted
+            </summary>
+        </member>
+        <member name="P:Postgrest.QueryOptions.OnConflict">
+            <summary>
+            /// By specifying the onConflict query parameter, you can make UPSERT work on a column(s) that has a UNIQUE constraint.
+            </summary>
+        </member>
+        <member name="T:Postgrest.Responses.BaseResponse">
+            <summary>
+            A wrapper class from which all Responses derive.
+            </summary>
+        </member>
+        <member name="T:Postgrest.Responses.ModeledResponse`1">
+            <summary>
+            A representation of a successful Postgrest response that transforms the string response into a C# Modelled response.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Postgrest.Responses.ModeledResponse`1.Model">
+            <summary>
+            The first model in the response.
+            </summary>
+        </member>
+        <member name="P:Postgrest.Responses.ModeledResponse`1.Models">
+            <summary>
+            A list of models in the response.
+            </summary>
+        </member>
+        <member name="M:Postgrest.Responses.ModeledResponse`1.#ctor(Postgrest.Responses.BaseResponse,Newtonsoft.Json.JsonSerializerSettings,System.Func{System.Collections.Generic.Dictionary{System.String,System.String}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Postgrest.Table`1">
+            <summary>
+            Class created from a model derived from `BaseModel` that can generate query requests to a Postgrest Endpoint.
+            
+            Representative of a `USE $TABLE` command.
+            </summary>
+            <typeparam name="T">Model derived from `BaseModel`.</typeparam>
+        </member>
+        <member name="P:Postgrest.Table`1.BaseUrl">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Table`1.TableName">
+            <inheritdoc />
+        </member>
+        <member name="P:Postgrest.Table`1.GetHeaders">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.#ctor(System.String,Newtonsoft.Json.JsonSerializerSettings,Postgrest.ClientOptions)">
+            <summary>
+            Typically called from the Client `new Client.Table&lt;ModelType&gt;`
+            </summary>
+            <param name="baseUrl">Api Endpoint (ex: "http://localhost:8000"), no trailing slash required.</param>
+            <param name="serializerSettings"></param>
+            <param name="options">Optional client configuration.</param>
+        </member>
+        <member name="M:Postgrest.Table`1.Filter(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Postgrest.Constants.Operator,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Filter(System.String,Postgrest.Constants.Operator,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Not(Postgrest.QueryFilter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Not(System.String,Postgrest.Constants.Operator,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Not(System.String,Postgrest.Constants.Operator,System.Collections.Generic.List{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Not(System.String,Postgrest.Constants.Operator,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.And(System.Collections.Generic.List{Postgrest.QueryFilter})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Or(System.Collections.Generic.List{Postgrest.QueryFilter})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Match(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Match(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Order(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Order(System.String,Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Order(System.String,System.String,Postgrest.Constants.Ordering,Postgrest.Constants.NullPosition)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Range(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Range(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Select(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Select(System.Linq.Expressions.Expression{System.Func{`0,System.Object[]}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Limit(System.Int32,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.OnConflict(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.OnConflict(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Columns(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Columns(System.Linq.Expressions.Expression{System.Func{`0,System.Object[]}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Offset(System.Int32,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Insert(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Insert(System.Collections.Generic.ICollection{`0},Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Upsert(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Upsert(System.Collections.Generic.ICollection{`0},Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Set(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Set(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.KeyValuePair{System.Object,System.Object}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Update(Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Update(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Delete(Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Delete(`0,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Count(Postgrest.Constants.CountType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Single(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.Get(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.GenerateUrl">
+            <summary>
+            Generates the encoded URL with defined query parameters that will be sent to the Postgrest API.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Table`1.PrepareRequestData(System.Object,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Transforms an object into a string mapped list/dictionary using `JsonSerializerSettings`.
+            </summary>
+            <param name="data"></param>
+            <param name="isInsert"></param>
+            <param name="isUpdate"></param>
+            <param name="isUpsert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Postgrest.Table`1.PrepareFilter(Postgrest.QueryFilter)">
+             <summary>
+             Transforms the defined filters into the expected Postgrest format.
+            
+             See: http://postgrest.org/en/v7.0.0/api.html#operators
+             </summary>
+             <param name="filter"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Postgrest.Table`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:Postgrest.Table`1.PerformInsert(System.Object,Postgrest.QueryOptions,System.Threading.CancellationToken)">
+            <summary>
+            Performs an INSERT Request.
+            </summary>
+            <param name="data"></param>
+            <param name="options"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray``1(``0[],Postgrest.IntRange)">
+            <summary>
+            Slices the specified array using the specified range.
+            </summary>
+        </member>
+    </members>
+</doc>

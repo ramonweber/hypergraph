@@ -1,0 +1,2015 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Supabase.Gotrue</name>
+    </assembly>
+    <members>
+        <member name="T:Supabase.Gotrue.AdminClient">
+             <summary>
+             Admin client for interacting with the Gotrue API. Intended for use on
+             servers or other secure environments.
+            
+             This client does NOT manage user sessions or track any other state.
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminClient.Options">
+            <summary>
+            The initialized client options.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.#ctor(System.String,Supabase.Gotrue.ClientOptions)">
+            <summary>
+            Initialize the client with a service key. 
+            </summary>
+            <param name="serviceKey">A valid JWT. Must be a full-access API key (e.g. 'service_role' or 'supabase_admin'). </param>
+            <param name="options"></param>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminClient.GetHeaders">
+            <summary>
+            Headers sent to the API on every request.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.AdminClient._api">
+            <summary>
+            The underlying API requests object that sends the requests
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.AdminClient._serviceKey">
+            <summary>
+            The service key used to authenticate with the API.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.GetUserById(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.GetUser(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.InviteUserByEmail(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.DeleteUser(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.CreateUser(System.String,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.CreateUser(Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.ListUsers(System.String,System.String,Supabase.Gotrue.Constants.SortOrder,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.UpdateUserById(System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.AdminClient.Update(Supabase.Gotrue.UserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="T:Supabase.Gotrue.Api">
+            <summary>
+            The REST calls to the Gotrue API.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Api.GetHeaders">
+            <summary>
+            Function that can be set to return dynamic headers.
+            Headers specified in the constructor will ALWAYS take precedence over headers returned by this function.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Api.Headers">
+            <summary>
+            Headers to be sent with every request. These will be merged with any headers returned by GetHeaders.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates a new API client
+            </summary>
+            <param name="url"></param>
+            <param name="headers"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignUpWithEmail(System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs a user up using an email address and password.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="options">Optional Signup data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignInWithEmail(System.String,System.String)">
+            <summary>
+            Logs in an existing user using their email address.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessEmailOptions)">
+            <summary>
+            Log in a user using magiclink or a one-time password (OTP).
+            
+            If the `{{ .ConfirmationURL }}` variable is specified in the email template, a magiclink will be sent.
+            If the `{{ .Token }}` variable is specified in the email template, an OTP will be sent.
+            If you're using phone sign-ins, only an OTP will be sent. You won't be able to send a magiclink for phone sign-ins.
+            
+            Be aware that you may get back an error message that will not distinguish
+            between the cases where the account does not exist or, that the account
+            can only be accessed via social login.
+            
+            Do note that you will need to configure a Whatsapp sender on Twilio
+            if you are using phone sign in with the 'whatsapp' channel. The whatsapp
+            channel is not supported on other providers at this time.
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessPhoneOptions)">
+            <summary>
+            Log in a user using magiclink or a one-time password (OTP).
+            
+            If the `{{ .ConfirmationURL }}` variable is specified in the email template, a magiclink will be sent.
+            If the `{{ .Token }}` variable is specified in the email template, an OTP will be sent.
+            If you're using phone sign-ins, only an OTP will be sent. You won't be able to send a magiclink for phone sign-ins.
+            
+            Be aware that you may get back an error message that will not distinguish
+            between the cases where the account does not exist or, that the account
+            can only be accessed via social login.
+            
+            Do note that you will need to configure a Whatsapp sender on Twilio
+            if you are using phone sign in with the 'whatsapp' channel. The whatsapp
+            channel is not supported on other providers at this time.
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignInWithIdToken(Supabase.Gotrue.Constants.Provider,System.String,System.String,System.String)">
+            <summary>
+            Allows signing in with an ID token issued by certain supported providers.
+            The [idToken] is verified for validity and a new session is established.
+            This method of signing in only supports [Provider.Google] or [Provider.Apple].
+            </summary>
+            <param name="provider">A supported provider (Google, Apple)</param>
+            <param name="idToken"></param>
+            <param name="nonce"></param>
+            <param name="captchaToken"></param>
+            <returns></returns>
+            <exception>
+                <cref>InvalidProviderException</cref>
+            </exception>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SendMagicLinkEmail(System.String,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Sends a magic login link to an email address.
+            </summary>
+            <param name="email"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.InviteUserByEmail(System.String,System.String)">
+            <summary>
+            Sends an invite link to an email address.
+            </summary>
+            <param name="email"></param>
+            <param name="jwt">this token needs role 'supabase_admin' or 'service_role'</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignUpWithPhone(System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs up a new user using their phone number and a password.The phone number of the user.
+            </summary>
+            <param name="phone">The phone number of the user.</param>
+            <param name="password">The password of the user.</param>
+            <param name="options">Optional Signup data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignInWithPhone(System.String,System.String)">
+            <summary>
+            Logs in an existing user using their phone number and password.
+            </summary>
+            <param name="phone">The phone number of the user.</param>
+            <param name="password">The password of the user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SendMobileOTP(System.String)">
+            <summary>
+            Sends a mobile OTP via SMS. Will register the account if it doesn't already exist
+            </summary>
+            <param name="phone">phone The user's phone number WITH international prefix</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.VerifyMobileOTP(System.String,System.String,Supabase.Gotrue.Constants.MobileOtpType)">
+            <summary>
+            Send User supplied Mobile OTP to be verified
+            </summary>
+            <param name="phone">The user's phone number WITH international prefix</param>
+            <param name="token">token that user was sent to their mobile phone</param>
+            <param name="type">e.g. SMS or phone change</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.VerifyEmailOTP(System.String,System.String,Supabase.Gotrue.Constants.EmailOtpType)">
+            <summary>
+            Send User supplied Email OTP to be verified
+            </summary>
+            <param name="email">The user's email address</param>
+            <param name="token">token that user was sent to their mobile phone</param>
+            <param name="type">Type of verification, e.g. invite, recovery, etc.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.ResetPasswordForEmail(System.String)">
+            <summary>
+            Sends a reset request to an email address.
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.CreateAuthedRequestHeaders(System.String)">
+            <summary>
+            Create a temporary object with all configured headers and adds the Authorization token to be used on request methods
+            </summary>
+            <param name="jwt">JWT</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.GetUriForProvider(Supabase.Gotrue.Constants.Provider,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Generates the relevant login URI for a third-party provider.
+            </summary>
+            <param name="provider"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.ExchangeCodeForSession(System.String,System.String)">
+            <summary>
+            Log in an existing user via code from third-party provider.
+            </summary>
+            <param name="codeVerifier">Generated verifier (probably from GetUrlForProvider)</param>
+            <param name="authCode">The received Auth Code Callback</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.SignOut(System.String)">
+            <summary>
+            Removes a logged-in session.
+            </summary>
+            <param name="jwt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.GetUser(System.String)">
+            <summary>
+            Gets User Details
+            </summary>
+            <param name="jwt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.GetUserById(System.String,System.String)">
+            <summary>
+            Get User details by Id
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="userId">userID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.UpdateUser(System.String,Supabase.Gotrue.UserAttributes)">
+            <summary>
+            Updates the User data
+            </summary>
+            <param name="jwt"></param>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.ListUsers(System.String,System.String,System.String,Supabase.Gotrue.Constants.SortOrder,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Lists users
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="filter">A string for example part of the email</param>
+            <param name="sortBy">Snake case string of the given key, currently only created_at is supported</param>
+            <param name="sortOrder">asc or desc, if null desc is used</param>
+            <param name="page">page to show for pagination</param>
+            <param name="perPage">items per page for pagination</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.CreateUser(System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="attributes">Additional administrative details</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.UpdateUserById(System.String,System.String,Supabase.Gotrue.UserAttributes)">
+            <summary>
+            Update user by Id
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="userId">userID</param>
+            <param name="userData">User attributes e.g. email, password, etc.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.Reauthenticate(System.String)">
+             <summary>
+             Sends a re-authentication request, used for password changes.
+            
+             See: https://github.com/supabase/gotrue#get-reauthenticate
+             </summary>
+             <param name="userJwt">The user's auth token.</param>
+             <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.DeleteUser(System.String,System.String)">
+            <summary>
+            Delete a user
+            </summary>
+            <param name="uid">The user uid you want to remove.</param>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.Settings">
+            <summary>
+            Calls the GoTrue server to get the settings (for example, if email auto confirmation is turned on)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Api.RefreshAccessToken(System.String)">
+            <summary>
+            Generates a new JWT
+            </summary>
+            <param name="refreshToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Client">
+            <inheritdoc />
+        </member>
+        <member name="F:Supabase.Gotrue.Client._api">
+            <summary>
+            The underlying API requests object that sends the requests
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Client._authEventHandlers">
+            <summary>
+            Handlers for notifications of state changes.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Client._debugNotification">
+            <summary>
+            Gets notifications if there is a failure not visible by exceptions (e.g. background thread refresh failure)
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Client._sessionPersistence">
+            <summary>
+            Object called to persist the session (e.g. filesystem or cookie)
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.#ctor(Supabase.Gotrue.ClientOptions)">
+             <summary>
+             Initializes the GoTrue stateful client. 
+             
+             You will likely want to at least specify a <see>
+                 <cref>ClientOptions.Url</cref>
+             </see>
+             
+             Sessions are not automatically retrieved when this object is created.
+             
+             If you want to load the session from your persistence store, <see>
+                 <cref>GotrueSessionPersistence</cref>
+             </see>.
+            
+             If you want to load/refresh the session, <see>
+                 <cref>RetrieveSessionAsync</cref>
+             </see>.
+            
+             For a typical client application, you'll want to load the session from persistence
+             and then refresh it. If your application is listening for session changes, you'll
+             get two SignIn notifications if the persisted session is valid - one for the
+             session loaded from disk, and a second on a successful session refresh.
+             
+             <remarks></remarks>
+             <example>
+            		var client = new Supabase.Gotrue.Client(options);
+                 client.LoadSession();
+            		await client.RetrieveSessionAsync();
+             </example>
+             </summary>
+             <param name="options"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SetPersistence(Supabase.Gotrue.Interfaces.IGotrueSessionPersistence{Supabase.Gotrue.Session})">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.Client.Options">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.GetUser(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.NotifyAuthStateChange(Supabase.Gotrue.Constants.AuthState)">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.Client.CurrentUser">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.AddStateChangedListener(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,Supabase.Gotrue.Session}.AuthEventHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.RemoveStateChangedListener(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,Supabase.Gotrue.Session}.AuthEventHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.ClearStateChangedListeners">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.Client.Online">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.Client.CurrentSession">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignUp(System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignUp(Supabase.Gotrue.Constants.SignUpType,System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignIn(System.String,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignInWithIdToken(Supabase.Gotrue.Constants.Provider,System.String,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessEmailOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessPhoneOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SendMagicLink(System.String,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignIn(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignInWithPassword(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignIn(Supabase.Gotrue.Constants.SignInType,System.String,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignIn(Supabase.Gotrue.Constants.Provider,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.VerifyOTP(System.String,System.String,Supabase.Gotrue.Constants.MobileOtpType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.VerifyOTP(System.String,System.String,Supabase.Gotrue.Constants.EmailOtpType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SignOut">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.Update(Supabase.Gotrue.UserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.Reauthenticate">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.ResetPasswordForEmail(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.RefreshSession">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.SetAuth(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.GetSessionFromUrl(System.Uri,System.Boolean)">
+            <summary>
+            Parses a <see cref="T:Supabase.Gotrue.Session"/> out of a <see cref="T:System.Uri"/>'s Query parameters.
+            </summary>
+            <param name="uri"></param>
+            <param name="storeSession"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.RetrieveSessionAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.ExchangeCodeForSession(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.Client.GetHeaders">
+            <summary>
+            Headers sent to the API on every request.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.AddDebugListener(System.Action{System.String,System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.UpdateSession(Supabase.Gotrue.Session)">
+            <summary>
+            Saves the session
+            </summary>
+            <param name="session"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.DestroySession">
+            <summary>
+            Clears the session
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.RefreshToken(System.String)">
+            <summary>
+            Refreshes a Token using the provided token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.RefreshToken">
+            <summary>
+            Refreshes a Token. If no token is provided, the current session is used.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Client.LoadSession">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.Settings">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.Debug(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.Client.Shutdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Supabase.Gotrue.ClientOptions">
+            <summary>
+            Class representation options available to the <see cref="T:Supabase.Gotrue.Client"/>.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ClientOptions.Url">
+            <summary>
+            Gotrue Endpoint
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.ClientOptions.Headers">
+            <summary>
+            Headers to be sent with subsequent requests.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ClientOptions.AutoRefreshToken">
+            <summary>
+            Should the Client automatically handle refreshing the User's Token?
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ClientOptions.MaximumRefreshWaitTime">
+             <summary>
+             By default, the Client will attempt to refresh the token when roughly 1/5 of the
+             time is left before expiration (assuming AutoRefreshToken is true).
+            
+             <see cref="M:Supabase.Gotrue.TokenRefresh.InitRefreshTimer"/>
+            
+             The default expiration time for GoTrue servers is 3600 (1 hour), with a maximum
+             of 604,800 seconds (one week).
+            
+             If you set the expiration to one week, you may want to refresh the token a bit
+             more frequently. This setting allows you to set a custom threshold for when the
+             client should AutoRefreshToken. The default value is 14400 seconds (4 hours).
+            
+             In this scenario, if you set the server expiration to one week and leave this
+             value set to the default, as long as the user logs in at least once a week they
+             should stay logged in indefinitely.
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ClientOptions.AllowUnconfirmedUserSessions">
+            <summary>
+            Very unlikely this flag needs to be changed except in very specific contexts.
+            
+            Enables tests to be E2E tests to be run without requiring users to have
+            confirmed emails - mirrors the Gotrue server's configuration.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants">
+            <summary>
+            Constants used throughout the Gotrue Client
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Constants.GOTRUE_URL">
+            <summary>
+            URL for the Gotrue server. Defaults to localhost:9999.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants.Provider">
+            <summary>
+            Providers available to Supabase
+            Ref: https://supabase.github.io/gotrue-js/modules.html#Provider
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants.AuthState">
+            <summary>
+            States that the Auth Client will raise events for.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants.SignInType">
+            <summary>
+            Specifies the functionality expected from the `SignIn` method
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants.OAuthFlowType">
+            <summary>
+            Represents an OAuth Flow type
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Constants.SignUpType">
+            <summary>
+            Specifies the functionality expected from the `SignUp` method
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.DebugNotification">
+            <summary>
+            Manages the debug listeners for the Gotrue Client. You'll want to install a debug listener
+            to get debug information back - especially for errors from the background RefreshToken thread.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.DebugNotification.AddDebugListener(System.Action{System.String,System.Exception})">
+            <summary>
+            Add a debug listener to the Gotrue Client. This will be called with debug information
+            </summary>
+            <param name="listener"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.DebugNotification.Log(System.String,System.Exception)">
+            <summary>
+            Send a debug message to all debug listeners
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Supabase.Gotrue.Exceptions.FailureHint">
+            <summary>
+            Maps Supabase server errors to hints based on the status code and the contents of the error message.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Exceptions.FailureHint.Reason">
+            <summary>
+            Best effort guess at why the exception was thrown.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.Unknown">
+            <summary>
+            The reason for the error could not be determined.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.Offline">
+            <summary>
+            The client is set to run offline or the network is unavailable.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserEmailNotConfirmed">
+            <summary>
+            The user's email address has not been confirmed.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserBadMultiple">
+            <summary>
+            The user's email address and password are invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserBadPassword">
+            <summary>
+            The user's password is invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserBadLogin">
+            <summary>
+            The user's login is invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserBadEmailAddress">
+            <summary>
+            The user's email address is invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserBadPhoneNumber">
+            <summary>
+            The user's phone number is invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserMissingInformation">
+            <summary>
+            The user's information is incomplete.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserAlreadyRegistered">
+            <summary>
+            The user is already registered.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.UserTooManyRequests">
+            <summary>
+            Server rejected due to number of requests
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.InvalidRefreshToken">
+            <summary>
+            The refresh token is invalid.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.ExpiredRefreshToken">
+            <summary>
+            The refresh token expired.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.AdminTokenRequired">
+            <summary>
+            This operation requires a bearer/service key (do not include this key in a client app)
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.NoSessionFound">
+            <summary>
+            No/invalid session found
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.Exceptions.FailureHint.Reason.BadSessionUrl">
+            <summary>
+            Something wrong with the URL to session transformation
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.FailureHint.DetectReason(Supabase.Gotrue.Exceptions.GotrueException)">
+            <summary>
+            Detects the reason for the error based on the status code and the contents of the error message.
+            </summary>
+            <param name="gte"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Exceptions.GotrueException">
+            <summary>
+            Errors from the GoTrue server are wrapped by this exception
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.GotrueException.#ctor(System.String)">
+            <summary>
+            Something with wrong with Gotrue / Auth
+            </summary>
+            <param name="message">Short description of the error source</param>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.GotrueException.#ctor(System.String,System.Exception)">
+            <summary>
+            Something with wrong with Gotrue / Auth
+            </summary>
+            <param name="message">Short description of the error source</param>
+            <param name="innerException">The underlying exception</param>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.GotrueException.#ctor(System.String,Supabase.Gotrue.Exceptions.FailureHint.Reason)">
+            <summary>
+            Something with wrong with Gotrue / Auth
+            </summary>
+            <param name="message">Short description of the error source</param>
+            <param name="reason">Best effort attempt to detect the reason for the failure</param>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.GotrueException.#ctor(System.String,Supabase.Gotrue.Exceptions.FailureHint.Reason,System.Exception)">
+            <summary>
+            Something with wrong with Gotrue / Auth
+            </summary>
+            <param name="message">Short description of the error source</param>
+            <param name="reason">Assigned reason</param>
+            <param name="innerException"></param>
+        </member>
+        <member name="P:Supabase.Gotrue.Exceptions.GotrueException.Response">
+            <summary>
+            The HTTP response from the server
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Exceptions.GotrueException.Content">
+            <summary>
+            The content of the HTTP response from the server
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Exceptions.GotrueException.StatusCode">
+            <summary>
+            The HTTP status code from the server
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Exceptions.GotrueException.AddReason">
+            <summary>
+            Adds the best-effort reason for the failure 
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Exceptions.GotrueException.Reason">
+            <summary>
+            Best guess at what caused the error from the server, see <see cref="T:Supabase.Gotrue.Exceptions.FailureHint.Reason"/>
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Helpers">
+            <summary>
+            Utility methods to assist with flow. Includes nonce generation and verification.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.GenerateNonce">
+             <summary>
+             Generates a nonce (code verifier)
+             Used with PKCE flow and Apple/Google Sign in.
+             Paired with <see cref="M:Supabase.Gotrue.Helpers.GeneratePKCENonceVerifier(System.String)"/>
+            
+             Sourced from: https://stackoverflow.com/a/65220376/3629438
+             </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.GeneratePKCENonceVerifier(System.String)">
+             <summary>
+             Generates a PKCE SHA256 code challenge given a nonce (code verifier)
+             
+             Paired with <see cref="M:Supabase.Gotrue.Helpers.GenerateNonce"/>
+            
+             Sourced from: https://stackoverflow.com/a/65220376/3629438
+             </summary>
+             <param name="codeVerifier"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.GenerateSHA256NonceFromRawNonce(System.String)">
+            <summary>
+            Generates a SHA256 nonce given a rawNonce, used Apple/Google Sign in.
+            </summary>
+            <param name="rawNonce"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.AddQueryParams(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Adds query params to a given Url
+            </summary>
+            <param name="url"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.MakeRequest``1(System.Net.Http.HttpMethod,System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint and coerce into a model. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Helpers.MakeRequest(System.Net.Http.HttpMethod,System.String,System.Object,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Helper to make a request using the defined parameters to an API Endpoint.
+            </summary>
+            <param name="method"></param>
+            <param name="url"></param>
+            <param name="data"></param>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1">
+            <summary>
+            Interface for the Gotrue Admin Client (auth).
+            </summary>
+            <typeparam name="TUser"></typeparam>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.CreateUser(Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Creates a user using the admin key (not the anonymous key).
+            Used in trusted server environments, not client apps.
+            </summary>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.CreateUser(System.String,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Creates a user using the admin key (not the anonymous key).
+            Used in trusted server environments, not client apps.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.DeleteUser(System.String)">
+            <summary>
+            Creates a user using the admin key (not the anonymous key).
+            Used in trusted server environments, not client apps.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.GetUser(System.String)">
+            <summary>
+            Gets a user from a user's JWT. This is using the GoTrue server to validate a user's JWT.
+            </summary>
+            <param name="jwt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.GetUserById(System.String)">
+            <summary>
+            Gets a user by ID from the server using the admin key (not the anonymous key).
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.InviteUserByEmail(System.String)">
+            <summary>
+            Sends an email to the user.
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.ListUsers(System.String,System.String,Supabase.Gotrue.Constants.SortOrder,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Lists users
+            </summary>
+            <param name="filter">A string for example part of the email</param>
+            <param name="sortBy">Snake case string of the given key, currently only created_at is supported</param>
+            <param name="sortOrder">asc or desc, if null desc is used</param>
+            <param name="page">page to show for pagination</param>
+            <param name="perPage">items per page for pagination</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.Update(Supabase.Gotrue.UserAttributes)">
+            <summary>
+            Updates a User using the service key
+            </summary>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueAdminClient`1.UpdateUserById(System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Update user by Id
+            </summary>
+            <param name="userId"></param>
+            <param name="userData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotrueClient`2">
+             <summary>
+             GoTrue stateful Client.
+            
+             This class is best used as a long-lived singleton object in your application. You can attach listeners
+             to be notified of changes to the user log in state, a persistence system for sessions across application
+             launches, and more. It includes a (optional, on by default) background thread that runs to refresh the
+             user's session token.
+            
+             Check out the test suite for examples of use.
+             </summary>
+             <example>
+             var client = new Supabase.Gotrue.Client(options);
+             var user = await client.SignIn("user@email.com", "fancyPassword");
+             </example>
+        </member>
+        <member name="P:Supabase.Gotrue.Interfaces.IGotrueClient`2.Online">
+             <summary>
+             Indicates if the client should be considered online or offline.
+             
+             In a server environment, this client would likely always be online.
+            
+             On a mobile client, you will want to pair this with a network implementation
+             to turn this on and off as the device goes online and offline.
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Interfaces.IGotrueClient`2.CurrentSession">
+             <summary>
+             The current Session as managed by this client. Does not refresh tokens or have any other side effects.
+            
+             You probably don't want to directly make changes to this object - you'll want to use other methods
+             on this class to make changes.
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Interfaces.IGotrueClient`2.CurrentUser">
+            <summary>
+            The currently logged in User. This is a local cache of the current session User. 
+            To persist modifications to the User you'll want to use other methods.
+            <see cref="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Update(Supabase.Gotrue.UserAttributes)"/>>
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotrueClient`2.AuthEventHandler">
+            <summary>
+            The method that is called when there is a user state change.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SetPersistence(Supabase.Gotrue.Interfaces.IGotrueSessionPersistence{`1})">
+            <summary>
+            Sets the persistence implementation for the client (e.g. file system, local storage, etc).
+            </summary>
+            <param name="persistence"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.AddStateChangedListener(Supabase.Gotrue.Interfaces.IGotrueClient{`0,`1}.AuthEventHandler)">
+             <summary>
+             Adds a listener to be notified when the user state changes (e.g. the user logs in, logs out,
+             the token is refreshed, etc).
+            
+             <see cref="T:Supabase.Gotrue.Constants.AuthState"/>
+             </summary>
+             <param name="authEventHandler"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.RemoveStateChangedListener(Supabase.Gotrue.Interfaces.IGotrueClient{`0,`1}.AuthEventHandler)">
+            <summary>
+            Removes a specified listener from event state changes.
+            </summary>
+            <param name="authEventHandler"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.ClearStateChangedListeners">
+             <summary>
+             Clears all of the listeners from receiving event state changes.
+            
+             WARNING: The persistence handler and refresh token thread are installed as state change
+             listeners. Clearing the listeners will also delete these handlers.
+             </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.NotifyAuthStateChange(Supabase.Gotrue.Constants.AuthState)">
+             <summary>
+             Notifies all listeners that the current user auth state has changed.
+            
+             This is mainly used internally to fire notifications - most client applications won't need this.
+             </summary>
+             <param name="stateChanged"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.GetSessionFromUrl(System.Uri,System.Boolean)">
+            <summary>
+            Converts a URL to a session. For client apps, this probably requires setting up URL handlers.
+            </summary>
+            <param name="uri"></param>
+            <param name="storeSession"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.RefreshSession">
+            <summary>
+            Refreshes the currently logged in User's Session.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.ResetPasswordForEmail(System.String)">
+            <summary>
+            Sends a reset request to an email address.
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.RetrieveSessionAsync">
+             <summary>
+             Typically called as part of the startup process for the client.
+            
+             This will take the currently loaded session (e.g. from a persistence implementation) and
+             if possible attempt to refresh it. If the loaded session is expired or invalid, it will
+             log the user out.
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SendMagicLink(System.String,Supabase.Gotrue.SignInOptions)">
+             <summary>
+             Sends a Magic email login link to the specified email.
+            
+             Most of the interesting configuration for this flow is done in the
+             Supabase/GoTrue admin panel.
+             
+             </summary>
+             <param name="email"></param>
+             <param name="options"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SetAuth(System.String)">
+            <summary>
+             Overrides the JWT access token for the current session. The access token will
+            then be sent in all subsequent network requests.
+            </summary>
+            <param name="accessToken">The JWT access token.</param>
+            <returns>Session.</returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignIn(Supabase.Gotrue.Constants.SignInType,System.String,System.String,System.String)">
+            <summary>
+            Log in an existing user, or login via a third-party provider.
+            </summary>
+            <param name="type">Type of Credentials being passed</param>
+            <param name="identifierOrToken">An email, phone, or RefreshToken</param>
+            <param name="password">Password to account (optional if `RefreshToken`)</param>
+            <param name="scopes">A space-separated list of scopes granted to the OAuth application.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignIn(System.String,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Sends a magic link login email to the specified email.
+            </summary>
+            <param name="email"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignIn(System.String,System.String)">
+            <summary>
+            Signs in a User.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessEmailOptions)">
+            <summary>
+            Log in a user using magiclink or a one-time password (OTP).
+            
+            If the `{{ .ConfirmationURL }}` variable is specified in the email template, a magiclink will be sent.
+            If the `{{ .Token }}` variable is specified in the email template, an OTP will be sent.
+            If you're using phone sign-ins, only an OTP will be sent. You won't be able to send a magiclink for phone sign-ins.
+            
+            Be aware that you may get back an error message that will not distinguish
+            between the cases where the account does not exist or, that the account
+            can only be accessed via social login.
+            
+            Do note that you will need to configure a Whatsapp sender on Twilio
+            if you are using phone sign in with the 'whatsapp' channel. The whatsapp
+            channel is not supported on other providers at this time.
+            </summary>
+            <remarks>Calling this method will wipe out the current session (if any)</remarks>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignInWithOtp(Supabase.Gotrue.SignInWithPasswordlessPhoneOptions)">
+            <summary>
+            Log in a user using magiclink or a one-time password (OTP).
+            
+            If the `{{ .ConfirmationURL }}` variable is specified in the email template, a magiclink will be sent.
+            If the `{{ .Token }}` variable is specified in the email template, an OTP will be sent.
+            If you're using phone sign-ins, only an OTP will be sent. You won't be able to send a magiclink for phone sign-ins.
+            
+            Be aware that you may get back an error message that will not distinguish
+            between the cases where the account does not exist or, that the account
+            can only be accessed via social login.
+            
+            Do note that you will need to configure a Whatsapp sender on Twilio
+            if you are using phone sign in with the 'whatsapp' channel. The whatsapp
+            channel is not supported on other providers at this time.
+            </summary>
+            <remarks>Calling this method will wipe out the current session (if any)</remarks>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignInWithPassword(System.String,System.String)">
+            <summary>
+            Log in an existing user with an email and password or phone and password.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignIn(Supabase.Gotrue.Constants.Provider,Supabase.Gotrue.SignInOptions)">
+             <summary>
+             Retrieves a <see cref="T:Supabase.Gotrue.ProviderAuthState"/> to redirect to for signing in with a <see cref="T:Supabase.Gotrue.Constants.Provider"/>.
+            
+             This will likely be paired with a PKCE flow (set in SignInOptions) - after redirecting the
+             user to the flow, you should pair with <see cref="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.ExchangeCodeForSession(System.String,System.String)"/>
+             </summary>
+             <param name="provider"></param>
+             <param name="options"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignInWithIdToken(Supabase.Gotrue.Constants.Provider,System.String,System.String,System.String)">
+            <summary>
+            Allows signing in with an ID token issued by certain supported providers.
+            The [idToken] is verified for validity and a new session is established.
+            This method of signing in only supports [Provider.Google] or [Provider.Apple].
+            </summary>
+            <param name="provider">A supported provider (Google, Apple)</param>
+            <param name="idToken">Provided from External Library</param>
+            <param name="nonce">Provided from External Library</param>
+            <param name="captchaToken">Provided from External Library</param>
+            <remarks>Calling this method will eliminate the current session (if any).</remarks>
+            <exception>
+                <cref>InvalidProviderException</cref>
+            </exception>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.ExchangeCodeForSession(System.String,System.String)">
+            <summary>
+            Logs in an existing user via a third-party provider.
+            </summary>
+            <param name="codeVerifier"></param>
+            <param name="authCode"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignUp(Supabase.Gotrue.Constants.SignUpType,System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs up a user
+            </summary>
+            <remarks>
+            Calling this method will log out the current user session (if any).
+            
+            By default, the user needs to verify their email address before logging in. To turn this off, disable confirm email in your project.
+            Confirm email determines if users need to confirm their email address after signing up.
+                - If Confirm email is enabled, a user is returned but session is null.
+                - If Confirm email is disabled, both a user and a session are returned.
+            When the user confirms their email address, they are redirected to the SITE_URL by default. You can modify your SITE_URL or add additional redirect URLs in your project.
+            If signUp() is called for an existing confirmed user:
+                - If Confirm email is enabled in your project, an obfuscated/fake user object is returned.
+                - If Confirm email is disabled, the error message, User already registered is returned.
+            To fetch the currently logged-in user, refer to <see cref="T:Supabase.Gotrue.User"/>.
+            </remarks>
+            <param name="type"></param>
+            <param name="identifier"></param>
+            <param name="password"></param>
+            <param name="options">Object containing redirectTo and optional user metadata (data)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignUp(System.String,System.String,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs up a user by email address.
+            </summary>
+            <remarks>
+            By default, the user needs to verify their email address before logging in. To turn this off, disable Confirm email in your project.
+            Confirm email determines if users need to confirm their email address after signing up.
+                - If Confirm email is enabled, a user is returned but session is null.
+                - If Confirm email is disabled, both a user and a session are returned.
+            When the user confirms their email address, they are redirected to the SITE_URL by default. You can modify your SITE_URL or
+            add additional redirect URLs in your project.
+            If signUp() is called for an existing confirmed user:
+                - If Confirm email is enabled in your project, an obfuscated/fake user object is returned.
+                - If Confirm email is disabled, the error message, User already registered is returned.
+            To fetch the currently logged-in user, refer to <see>
+                <cref>User</cref>
+            </see>.
+            </remarks>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="options">Object containing redirectTo and optional user metadata (data)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Reauthenticate">
+             <summary>
+             Used for re-authenticating a user in password changes.
+            
+             See: https://github.com/supabase/gotrue#get-reauthenticate
+             </summary>
+             <returns></returns>
+             <exception cref="T:Supabase.Gotrue.Exceptions.GotrueException"></exception>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.SignOut">
+            <summary>
+            Signs out a user and invalidates the current token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Update(Supabase.Gotrue.UserAttributes)">
+            <summary>
+            Updates a User.
+            </summary>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.VerifyOTP(System.String,System.String,Supabase.Gotrue.Constants.MobileOtpType)">
+            <summary>
+            Log in a user given a User supplied OTP received via mobile.
+            </summary>
+            <param name="phone">The user's phone number.</param>
+            <param name="token">Token sent to the user's phone.</param>
+            <param name="type">SMS or phone change</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.VerifyOTP(System.String,System.String,Supabase.Gotrue.Constants.EmailOtpType)">
+            <summary>
+            Log in a user give a user supplied OTP received via email.
+            </summary>
+            <param name="email"></param>
+            <param name="token"></param>
+            <param name="type">Defaults to MagicLink</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.AddDebugListener(System.Action{System.String,System.Exception})">
+            <summary>
+            Add a listener to get errors that occur outside of a typical Exception flow.
+            In particular, this is used to get errors and messages from the background thread
+            that automatically manages refreshing the user's token.
+            </summary>
+            <param name="listener">Callback method for debug messages</param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.LoadSession">
+            <summary>
+            Loads the session from the persistence layer.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Settings">
+            <summary>
+            Retrieves the settings from the server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Supabase.Gotrue.Interfaces.IGotrueClient`2.Options">
+            <summary>
+            Returns the client options.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.GetUser(System.String)">
+            <summary>
+            Get User details by JWT. Can be used to validate a JWT.
+            </summary>
+            <param name="jwt">A valid JWT. Must be a JWT that originates from a user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Debug(System.String,System.Exception)">
+            <summary>
+            Posts messages and exceptions to the debug listener. This is particularly useful for sorting
+            out issues with the refresh token background thread.
+            </summary>
+            <param name="message"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueClient`2.Shutdown">
+             <summary>
+             Let all of the listeners know that the stateless client is being shutdown.
+            
+             In particular, the background thread that is used to refresh the token is stopped.
+             </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotruePersistenceListener`1">
+            <summary>
+            Interface for a session persistence auth state handler.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Interfaces.IGotruePersistenceListener`1.Persistence">
+            <summary>
+            The persistence implementation for the client (e.g. file system, local storage, etc).
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotruePersistenceListener`1.EventHandler(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,`0},Supabase.Gotrue.Constants.AuthState)">
+            <summary>
+            Routes auth state changes to the persistence implementation.
+            </summary>
+            <param name="sender"></param>
+            <param name="stateChanged"></param>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotrueSessionPersistence`1">
+            <summary>
+            Interface for session persistence. As a reminder, make sure you handle exceptions and
+            other error conditions in your implementation.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueSessionPersistence`1.SaveSession(`0)">
+            <summary>
+            Saves the session to the persistence implementation.
+            </summary>
+            <param name="session"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueSessionPersistence`1.DestroySession">
+            <summary>
+            Destroys the session in the persistence implementation. Usually this means
+            deleting the session file or clearing local storage.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueSessionPersistence`1.LoadSession">
+            <summary>
+            Loads the session from the persistence implementation. Returns null if there is no session.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2">
+            <summary>
+            A Stateless Gotrue Client
+            </summary>
+            <example>
+            var options = new StatelessClientOptions { Url = "https://mygotrueurl.com" };
+            var user = await client.SignIn("user@email.com", "fancyPassword", options);
+            </example>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.CreateUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="options"></param>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.CreateUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="options"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.DeleteUser(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Deletes a User.
+            </summary>
+            <param name="uid"></param>
+            <param name="jwt">this token needs role 'supabase_admin' or 'service_role'</param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.GetApi(Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Initialize/retrieve the underlying API for this client
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.GetSessionFromUrl(System.Uri,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Parses a <see cref="T:Supabase.Gotrue.Session"/> out of a <see cref="T:System.Uri"/>'s Query parameters.
+            </summary>
+            <param name="uri"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.GetUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Get User details by JWT. Can be used to validate a JWT.
+            </summary>
+            <param name="jwt">A valid JWT. Must be a JWT that originates from a user.</param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.GetUserById(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String)">
+            <summary>
+            Get User details by Id
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="options"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.InviteUserByEmail(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Sends an invite email link to the specified email.
+            </summary>
+            <param name="email"></param>
+            <param name="jwt">this token needs role 'supabase_admin' or 'service_role'</param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.ListUsers(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,System.String,Supabase.Gotrue.Constants.SortOrder,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Lists users
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="options"></param>
+            <param name="filter">A string for example part of the email</param>
+            <param name="sortBy">Snake case string of the given key, currently only created_at is supported</param>
+            <param name="sortOrder">asc or desc, if null desc is used</param>
+            <param name="page">page to show for pagination</param>
+            <param name="perPage">items per page for pagination</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.RefreshToken(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Refreshes a Token
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.ResetPasswordForEmail(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Sends a reset request to an email address.
+            </summary>
+            <param name="email"></param>
+            <param name="options"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SendMagicLink(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Sends a Magic email login link to the specified email.
+            </summary>
+            <param name="email"></param>
+            <param name="options"></param>
+            <param name="signInOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignIn(Supabase.Gotrue.Constants.Provider,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Retrieves a Url to redirect to for signing in with a <see cref="T:Supabase.Gotrue.Constants.Provider"/>.
+            
+            This method will need to be combined with <see cref="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.GetSessionFromUrl(System.Uri,Supabase.Gotrue.StatelessClient.StatelessClientOptions)"/> when the
+            Application receives the Oauth Callback.
+            </summary>
+            <example>
+            var client = Supabase.Gotrue.Client.Initialize(options);
+            var url = client.SignIn(Provider.Github);
+            
+            // Do Redirect User
+            
+            // Example code
+            Application.HasReceivedOauth += async (uri) => {
+                var session = await client.GetSessionFromUri(uri, true);
+            }
+            </example>
+            <param name="provider"></param>
+            <param name="options"></param>
+            <param name="signInOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignIn(Supabase.Gotrue.Constants.SignInType,System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Log in an existing user, or login via a third-party provider.
+            </summary>
+            <param name="type">Type of Credentials being passed</param>
+            <param name="identifierOrToken">An email, phone, or RefreshToken</param>
+            <param name="password">Password to account (optional if `RefreshToken`)</param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignIn(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <summary>
+            Sends a Magic email login link to the specified email.
+            </summary>
+            <param name="email"></param>
+            <param name="options"></param>
+            <param name="signInOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignIn(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Signs in a User with an email address and password.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignOut(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Logout a User
+            This will revoke all refresh tokens for the user.
+            JWT tokens will still be valid for stateless auth until they expire.
+            </summary>
+            <param name="jwt"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignUp(Supabase.Gotrue.Constants.SignUpType,System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs up a user
+            </summary>
+            <param name="type">Type of signup</param>
+            <param name="identifier">Phone or Email</param>
+            <param name="password"></param>
+            <param name="options"></param>
+            <param name="signUpOptions">Object containing redirectTo and optional user metadata (data)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.SignUp(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignUpOptions)">
+            <summary>
+            Signs up a user by email address
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="options"></param>
+            <param name="signUpOptions">Object containing redirectTo and optional user metadata (data)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.Update(System.String,Supabase.Gotrue.UserAttributes,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Updates a User's attributes
+            </summary>
+            <param name="accessToken"></param>
+            <param name="attributes"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.UpdateUserById(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <summary>
+            Update user by Id
+            </summary>
+            <param name="jwt">A valid JWT. Must be a full-access API key (e.g. service_role key).</param>
+            <param name="options"></param>
+            <param name="userId"></param>
+            <param name="userData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.VerifyOTP(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.Constants.MobileOtpType)">
+            <summary>
+            Log in a user given a User supplied OTP received via mobile.
+            </summary>
+            <param name="phone">The user's phone number.</param>
+            <param name="token">Token sent to the user's phone.</param>
+            <param name="options"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.VerifyOTP(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.Constants.EmailOtpType)">
+            <summary>
+            Log in a user give a user supplied OTP received via email.
+            </summary>
+            <param name="email"></param>
+            <param name="token"></param>
+            <param name="options"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Supabase.Gotrue.Interfaces.IGotrueStatelessClient`2.Settings(Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <summary>
+            Retrieve the current settings for the Gotrue instance.
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.NetworkStatus">
+            <summary>
+            A Network status system to pair with the <see cref="P:Supabase.Gotrue.Client.Online"/>Client.
+            
+            <see>
+                <cref>https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/network-info</cref>
+            </see>
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.NetworkStatus.#ctor(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,Supabase.Gotrue.Session})">
+            <summary>
+            Set up a listener for the network status.
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:Supabase.Gotrue.NetworkStatus.PingCheck">
+            <summary>
+            Pings the URL in the <see cref="P:Supabase.Gotrue.Client.Options"/> to check if the network is online.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.NetworkStatus.StartAsync">
+            <summary>
+            Starts the network status system. This will listen to the OS for network changes,
+            and also does a ping check to confirm the current network status.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.PasswordlessSignInState">
+            <summary>
+            A utility class that represents a successful response from a request to send a user
+            Passwordless Sign In.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.PasswordlessSignInState.PKCEVerifier">
+            <summary>
+            PKCE Verifier generated if using the PKCE flow type.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.PersistenceListener">
+            <summary>
+            Manages the persistence of the Gotrue Session. You'll want to install a persistence listener
+            to persist user sessions between app restarts. 
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.PersistenceListener.#ctor(Supabase.Gotrue.Interfaces.IGotrueSessionPersistence{Supabase.Gotrue.Session})">
+            <summary>
+            Create a new persistence listener
+            </summary>
+            <param name="persistence"></param>
+        </member>
+        <member name="P:Supabase.Gotrue.PersistenceListener.Persistence">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.PersistenceListener.EventHandler(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,Supabase.Gotrue.Session},Supabase.Gotrue.Constants.AuthState)">
+            <summary>
+            If you install a persistence listener, it will be called when the user signs in and signs out.
+            </summary>
+            <param name="sender"></param>
+            <param name="stateChanged"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Supabase.Gotrue.ProviderAuthState">
+             <summary>
+             Represents an OAuth Provider's URI and Parameters.
+            
+             For use with Provider Auth, PKCE Auth, and ID Token auth.
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ProviderAuthState.Uri">
+            <summary>
+            The Generated Provider's URI
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.ProviderAuthState.PKCEVerifier">
+            <summary>
+            The PKCE Verifier nonce, only set during a PKCE auth flow.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.ProviderAuthState.#ctor(System.Uri)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="T:Supabase.Gotrue.Responses.BaseResponse">
+            <summary>
+            A wrapper class from which all Responses derive.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Responses.BaseResponse.ResponseMessage">
+            <summary>
+            The HTTP response message.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.Responses.BaseResponse.Content">
+            <summary>
+            The HTTP response content as a string.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.Session">
+            <summary>
+            Represents a Gotrue Session
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.Session.Expired">
+            <summary>
+            Returns true if the session has expired
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Supabase.Gotrue.Settings">
+            <summary>
+            Settings data retrieved from the GoTrue server.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.SignInOptions">
+            <summary>
+            Options used for signing in a user.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInOptions.RedirectTo">
+            <summary>
+            A URL or mobile address to send the user to after they are confirmed.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInOptions.Scopes">
+            <summary>
+            A space-separated list of scopes granted to the OAuth application.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInOptions.QueryParams">
+            <summary>
+            An object of key-value pairs containing query parameters granted to the OAuth application.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInOptions.FlowType">
+             <summary>
+             Represents an OAuth Flow type, defaults to `Implicit`
+            
+             PKCE is recommended for mobile and server-side applications.
+             </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.SignInWithPasswordlessOptions">
+            <summary>
+            Options used for signing in a user with passwordless Options
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.SignInWithPasswordlessOptions.Data">
+            <summary>
+             A custom data object to store the user's metadata. This maps to the `auth.users.user_metadata` column.
+             
+            The `data` should be a JSON serializable object that includes user-specific info, such as their first and last name.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessOptions.CaptchaToken">
+            <summary>
+            Verification token received when the user completes the captcha on the site.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessOptions.ShouldCreateUser">
+            <summary>
+            If set to false, this method will not create a new user. Defaults to true.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.SignInWithPasswordlessEmailOptions">
+            <inheritdoc />
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessEmailOptions.Email">
+            <summary>
+            The user's email address.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessEmailOptions.EmailRedirectTo">
+            <summary>
+            The redirect url embedded in the email link.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessEmailOptions.FlowType">
+             <summary>
+             Represents an OAuth Flow type, defaults to `Implicit`
+            
+             PKCE is recommended for mobile and server-side applications.
+             </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.SignInWithPasswordlessEmailOptions.#ctor(System.String)">
+            <param name="email">The user's email address.</param>
+        </member>
+        <member name="T:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions">
+            <inheritdoc />
+        </member>
+        <member name="T:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.MessagingChannel">
+            <summary>
+            Represents a messaging channel to use for sending the OTP.
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.MessagingChannel.SMS">
+            <summary>
+            SMS
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.MessagingChannel.WHATSAPP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.Phone">
+            <summary>
+            The user's phone number
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.Channel">
+            <summary>
+            Messaging channel to use (e.g. whatsapp or sms), Defaults to SMS.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.SignInWithPasswordlessPhoneOptions.#ctor(System.String)">
+            <param name="phone">The user's phone number</param>
+        </member>
+        <member name="T:Supabase.Gotrue.SignUpOptions">
+            <summary>
+            Options used for signing up a user.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.SignUpOptions.Data">
+            <summary>
+            Optional user metadata.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.StatelessClient">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.Settings(Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.GetApi(Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignUp(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignUpOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignUp(Supabase.Gotrue.Constants.SignUpType,System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignUpOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignIn(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SendMagicLink(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignIn(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignIn(Supabase.Gotrue.Constants.SignInType,System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignIn(Supabase.Gotrue.Constants.Provider,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.SignInOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.SignOut(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.VerifyOTP(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.Constants.MobileOtpType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.VerifyOTP(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.Constants.EmailOtpType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.Update(System.String,Supabase.Gotrue.UserAttributes,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.InviteUserByEmail(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.ResetPasswordForEmail(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.ListUsers(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,System.String,Supabase.Gotrue.Constants.SortOrder,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.GetUserById(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.GetUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.CreateUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.CreateUser(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.UpdateUserById(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions,System.String,Supabase.Gotrue.AdminUserAttributes)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.DeleteUser(System.String,System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.GetSessionFromUrl(System.Uri,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Supabase.Gotrue.StatelessClient.RefreshToken(System.String,Supabase.Gotrue.StatelessClient.StatelessClientOptions)">
+            <inheritdoc />
+        </member>
+        <member name="T:Supabase.Gotrue.StatelessClient.StatelessClientOptions">
+            <summary>
+            Class representation options available to the <see cref="T:Supabase.Gotrue.Client"/>.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.StatelessClient.StatelessClientOptions.Url">
+            <summary>
+            Gotrue Endpoint
+            </summary>
+        </member>
+        <member name="F:Supabase.Gotrue.StatelessClient.StatelessClientOptions.Headers">
+            <summary>
+            Headers to be sent with subsequent requests.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.StatelessClient.StatelessClientOptions.AllowUnconfirmedUserSessions">
+            <summary>
+            Very unlikely this flag needs to be changed except in very specific contexts.
+            
+            Enables tests to be E2E tests to be run without requiring users to have
+            confirmed emails - mirrors the Gotrue server's configuration.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.TokenRefresh">
+            <summary>
+            Manages the auto-refresh of the Gotrue Session.
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.TokenRefresh.#ctor(Supabase.Gotrue.Client)">
+            <summary>
+            Sets up the TokenRefresh class, bound to a specific client
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="F:Supabase.Gotrue.TokenRefresh._refreshTimer">
+            <summary>
+            Internal timer reference for token refresh
+            <see>
+                <cref>AutoRefreshToken</cref>
+            </see>
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.TokenRefresh.ManageAutoRefresh(Supabase.Gotrue.Interfaces.IGotrueClient{Supabase.Gotrue.User,Supabase.Gotrue.Session},Supabase.Gotrue.Constants.AuthState)">
+            <summary>
+            Turns the auto-refresh timer on or off based on the current auth state
+            </summary>
+            <param name="sender">The Client and Session data</param>
+            <param name="stateChanged"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Supabase.Gotrue.TokenRefresh.InitRefreshTimer">
+            <summary>
+            Sets up the auto-refresh timer
+            </summary>
+        </member>
+        <member name="M:Supabase.Gotrue.TokenRefresh.HandleRefreshTimerTick(System.Object)">
+             <summary>
+             This is the background thread that is set up and runs to refresh the token.
+            
+             This thread is set up to run every five seconds. If the user is offline,
+             it won't try to refresh the token.
+             </summary>
+             <param name="_"></param>
+        </member>
+        <member name="T:Supabase.Gotrue.User">
+            <summary>
+            Represents a Gotrue User
+            Ref: https://supabase.github.io/gotrue-js/interfaces/User.html
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.AdminUserAttributes">
+            <summary>
+            Ref: https://supabase.github.io/gotrue-js/interfaces/AdminUserAttributes.html
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminUserAttributes.AppMetadata">
+             <summary>
+             A custom data object for app_metadata that. Can be any JSON serializable data.
+             Only a service role can modify
+            
+             Note: GoTrue does not yest support creating a user with app metadata
+                 (see: https://github.com/supabase/gotrue-js/blob/d7b334a4283027c65814aa81715ffead262f0bfa/test/GoTrueApi.test.ts#L45)
+             </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminUserAttributes.UserMetadata">
+            <summary>
+            A custom data object for user_metadata. Can be any JSON serializable data.
+            Only a service role can modify.
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminUserAttributes.EmailConfirm">
+            <summary>
+            Sets if a user has confirmed their email address.
+            Only a service role can modify
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.AdminUserAttributes.PhoneConfirm">
+            <summary>
+            Sets if a user has confirmed their phone number.
+            Only a service role can modify
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.UserAttributes">
+            <summary>
+            Ref: https://supabase.github.io/gotrue-js/interfaces/UserAttributes.html
+            </summary>
+        </member>
+        <member name="P:Supabase.Gotrue.UserAttributes.Data">
+            <summary>
+            A custom data object for user_metadata that a user can modify.Can be any JSON.
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.VerifyOTPParams">
+            <summary>
+            Ref: https://supabase.github.io/gotrue-js/interfaces/VerifyEmailOTPParams.html
+            </summary>
+        </member>
+        <member name="T:Supabase.Gotrue.UserIdentity">
+            <summary>
+            Ref: https://supabase.github.io/gotrue-js/interfaces/UserIdentity.html
+            </summary>
+        </member>
+    </members>
+</doc>
