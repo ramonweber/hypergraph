@@ -28,7 +28,7 @@ The repository features 4 different ways to access the files
 1. Full source code for your own experimentation via the `/ResearchGeometryLibrary/RGeoLib`
 2. Visualization tools for representing floorplans as hypergraphs `/notebooks/visualize_hypergraph.ipynb`
 3. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
-4. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
+4. API integration of basic FloorPlanner functionality via the web as `/FloorPlanTools`
 
 # Requirements
 
@@ -36,7 +36,7 @@ The package development version is tested on a Windows operating system. While t
 
 - CAD environment [Rhino3d](https://rhino3d.com/ "rhino") (version7) 
 - Environmental simulation [Climate Studio](https://www.solemma.com/climatestudio "cs") (version 2.0.8742.29048)
-- Python `3.10.12` for the hypergraph visualization
+- Python `3.10.12` for the hypergraph visualizer
 
 # Hypergraph Visualizer
 
