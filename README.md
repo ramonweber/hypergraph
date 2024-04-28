@@ -1,6 +1,27 @@
+# Hypergraph Research Geometry Library and API
+
+Full source code and documentation of ongoing architectural geometry research. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
+
+This is a work in progress! 
+contact: reweber@mit.edu
+
+![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
+*Figure 1: Illustration of the hypergraph representation and environmental analysis*
+
+## How to use this repository
+
+The repository features 3 different ways to access the files 
+1. Full source code for your own experimentation via the `/ResearchGeometryLibrary/RGeoLib`
+2. Sample files for integration into the Rhino3d and Grasshopper CAD environment `/samples`
+3. API integration of basic FLoorPlanner functionality via the web as `/FloorPlanTools`
+
+# Sample files and integration into CAD
+
+The sample files require the CAD software [Rhino3d](https://rhino3d.com/ "Optional title") (version7). The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:\geolib`
+
 # FloorPlanner API
 
-Scaffold for integrating Ramon W.'s Floor Plan Analysis library into a web API.
+Scaffold for integrating the hypergraph functionality and floor plan analysis library into a web API. Contributed by @szvsw.
 
 ## Consuming the API
 
