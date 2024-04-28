@@ -70,7 +70,7 @@ The three sample scripts showcase how the hypergraph implementation inside a CAD
 
 ![Hypergraph overview](samples/Weber2024%20Hypergraph%20Reference%20Script%202%20Environmental%20Simulation.JPG)
 *Sample Script 2: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan is analyzed in terms of space, energy use and daylight.*
-(Run time ~ 30s for environmental simulation including daylight and energy*)
+(Run time ~ 10s for environmental simulation including daylight and energy of a single apartment*)
 
 **Run time measured on Standard Desktop PC (Windows OS, Intel(R) Core(TM) i7-6700k CPY @ 4.00 GHz, 64GB RAM, NVIDIA GeForce GTX 1080) 
 
