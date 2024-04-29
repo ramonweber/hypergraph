@@ -1,10 +1,13 @@
 # Hypergraph Research Geometry Library and API
 
 Full source code and documentation of ongoing architectural geometry research on automated floor plan analysis and generation. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
-
 This package is maintained by [@ramonweber](https://github.com/ramonweber) with contributions from [@szvsw](https://github.com/szvsw) for the web api implementation.
 
+The repository is supplementary to the following paper
+A hypergraph analysis framework shows carbon reduction potential of effective space use in housing. Ramon Elias Weber, Caitlin Mueller, Christoph Reinhart. 2024 (under review)
+
 Contact: reweber@mit.edu
+
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
