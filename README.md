@@ -78,6 +78,10 @@ The three sample scripts showcase how the hypergraph implementation inside a CAD
 *Sample Script 2: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan is analyzed in terms of space, energy use and daylight.*
 (Run time ~ 10s for environmental simulation including daylight and energy of a single apartment*)
 
+![Hypergraph overview]([samples/Weber2024%20Hypergraph%20Reference%20Script%203%20Occupancy.JPG])
+*Sample Script 3: Screenshot from inside the CAD environment Rhino3d and the node based scripting platform Grasshopper where a floor plan can be evaluated for spatial usage via different furniture blocks, depending on occupancy.*
+(Run time ~ 10s for environmental simulation including daylight and energy of a single apartment*)
+
 **Run time measured on Standard Desktop PC (Windows OS, Intel(R) Core(TM) i7-6700k CPY @ 4.00 GHz, 64GB RAM, NVIDIA GeForce GTX 1080) 
 
 # FloorPlanner API
