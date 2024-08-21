@@ -8,6 +8,9 @@ This package is maintained by [@ramonweber](https://github.com/ramonweber) with 
 The repository is supplementary to the following paper:
 [`A hypergraph analysis framework shows carbon reduction potential of effective space use in housing. Ramon Elias Weber, Caitlin Mueller, Christoph Reinhart. 2024 (under review)`](https://arxiv.org/abs/2405.01290)
 
+An archived repository of this code is available at:
+[![DOI](https://zenodo.org/badge/793178937.svg)](https://zenodo.org/doi/10.5281/zenodo.13353496)
+
 
 Contact: reweber@mit.edu
 
