@@ -8,7 +8,7 @@ The repository is supplementary to the following paper:
 
 An archived repository of this code is available at:
 
-[Open access paper link via Nature Communications](https://rdcu.be/dViHF)
+[Open access paper link via Nature Communications](https://www.nature.com/articles/s41467-024-52506-z#citeas)
 
 
 Contact: ramon@berkeley.edu
