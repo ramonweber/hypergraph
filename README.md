@@ -69,9 +69,9 @@ Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment 
 
 # Sample files and demos
 
-![me](https://github.com/ramonweber/hypergraph/blob/main/Hypergraph_SampleFloorPlans.gif)
-
 The sample files require the CAD software. The content of the folder `/samples/_requiredDLLs` should be unblocked and placed on accessible on the local hard drive in the folder `C:/geolib`. In Rhino3d the `.3dm` file has to be loaded. Then the Grasshopper environment inside Rhino3d can be started and the corresponding `.gh` file loaded with the same name.
+
+![me](https://github.com/ramonweber/hypergraph/blob/main/Hypergraph_SampleFloorPlans.gif)
 
 The three sample scripts showcase how the hypergraph implementation inside a CAD software to automatically generate and evaluate a floor plan. In the first script `/samples/Hypergraph Reference Script 0 Load Hypergraph.3dm` a `.json` file with example hypergraphs can be loaded and visualized. In the second one `/samples/Hypergraph Reference Script 1 Transfer Layout via Hypergraph.3dm` six input floor plans can be applied to a target apartment boundary geometry. The boundary geometry is defined as a boundary polyline (a series of closed lines) and with lines defining circulation and façade access. The third set of sample files shows the environmental analysis workflow connected with the hypergraph generated floor plan layouts `/samples/Hypergraph Reference Script 2 Environmental Simulation.3dm`. Both daylight simulation and energy simulation of different building envelopes can be run in parallel and their output evaluated.
 
