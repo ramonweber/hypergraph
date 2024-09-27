@@ -9,7 +9,7 @@ The repository is supplementary to the following paper:
 
 An archived repository of this code is available at:
 
-[![DOI](https://zenodo.org/badge/793178937.svg)](https://doi.org/10.1038/s41467-024-52506-z)
+[![Paper Link]](https://rdcu.be/dViHF)
 
 
 Contact: ramon@berkeley.edu
