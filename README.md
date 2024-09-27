@@ -6,12 +6,14 @@ This package is maintained by [@ramonweber](https://github.com/ramonweber) with 
 The repository is supplementary to the following paper:
 [`A hypergraph analysis framework shows carbon reduction potential of effective space use in housing. Ramon Elias Weber, Caitlin Mueller, Christoph Reinhart. Nature Communications, 2024. https://doi.org/10.1038/s41467-024-52506-z`](https://doi.org/10.1038/s41467-024-52506-z)
 
-An archived repository of this code is available at:
+The paper is available at:
 
 [Open access paper link via Nature Communications](https://www.nature.com/articles/s41467-024-52506-z#citeas)
 
-
 Contact: ramon@berkeley.edu
+
+An archived repository of this code is available at:
+[![DOI](https://zenodo.org/badge/793178937.svg)](https://doi.org/10.1038/s41467-024-52506-z)
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
