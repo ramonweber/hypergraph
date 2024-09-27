@@ -1,6 +1,5 @@
 # Hypergraph Research Geometry Library and API
 
-
 Full source code and documentation of ongoing architectural geometry research on automated floor plan analysis and generation. The repository features a C# source code of the research geometry library, a (mostly) 2d geometry library implementing the hypergraph representation. 
 This package is maintained by [@ramonweber](https://github.com/ramonweber) with contributions from [@szvsw](https://github.com/szvsw) for the web api implementation.
 
@@ -9,7 +8,7 @@ The repository is supplementary to the following paper:
 
 An archived repository of this code is available at:
 
-[Open access paper link via @Nature Communications](https://rdcu.be/dViHF)
+[Open access paper link via Nature Communications](https://rdcu.be/dViHF)
 
 
 Contact: ramon@berkeley.edu
