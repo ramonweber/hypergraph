@@ -13,8 +13,7 @@ An archived repository of this code is available at:
 [![DOI](https://zenodo.org/badge/793178937.svg)](https://zenodo.org/doi/10.5281/zenodo.13353496)
 
 
-Contact: reweber@mit.edu
-![me](https://github.com/ramonweber/hypergraph/blob/main/GraphDivision.gif)
+Contact: ramon@berkeley.edu
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
@@ -51,6 +50,8 @@ The package development version is tested on a Windows operating system. While t
 (Installation time ~10min)
 
 # Hypergraph Visualizer
+
+![me](https://github.com/ramonweber/hypergraph/blob/main/GraphDivision.gif)
 
 Open the notebook `notebooks/visualize_hypergraph.ipynb` to visualize apartment floor plans as hypergraphs. A json file with sample apartment geometry can be found in `samples/sample_hypergraphs.ipynb`
 <table>
