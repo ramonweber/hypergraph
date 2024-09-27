@@ -1,0 +1,17 @@
+TY  - JOUR
+AU  - Weber, Ramon Elias
+AU  - Mueller, Caitlin
+AU  - Reinhart, Christoph
+PY  - 2024
+DA  - 2024/09/27
+TI  - A hypergraph model shows the carbon reduction potential of effective space use in housing
+JO  - Nature Communications
+SP  - 8327
+VL  - 15
+IS  - 1
+AB  - Humans spend over 90% of their time in buildings, which account for 40% of anthropogenic greenhouse gas emissions and are a leading driver of climate change. Incentivizing more sustainable construction, building codes are used to enforce indoor comfort standards and minimum energy efficiency requirements. However, they currently only reward measures such as equipment or envelope upgrades and disregard the actual spatial configuration and usage. Using a new hypergraph model that encodes building floorplan organization and facilitates automatic geometry creation, we demonstrate that space efficiency outperforms envelope upgrades in terms of operational carbon emissions in 72%, 61% and 33% of surveyed buildings in Zurich, New York, and Singapore. Using automatically generated floorplans in a case study in Zurich further increased access to daylight by up to 24%, revealing that auto-generated floorplans have the potential to improve the quality of residential spaces in terms of environmental performance and access to daylight.
+SN  - 2041-1723
+UR  - https://doi.org/10.1038/s41467-024-52506-z
+DO  - 10.1038/s41467-024-52506-z
+ID  - Weber2024
+ER  - 
