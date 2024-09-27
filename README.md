@@ -13,7 +13,9 @@ The paper is available at:
 Contact: ramon@berkeley.edu
 
 An archived repository of this code is available at:
+
 [![DOI](https://zenodo.org/badge/793178937.svg)](https://doi.org/10.1038/s41467-024-52506-z)
+
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
