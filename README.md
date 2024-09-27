@@ -6,7 +6,7 @@ Full source code and documentation of ongoing architectural geometry research on
 This package is maintained by [@ramonweber](https://github.com/ramonweber) with contributions from [@szvsw](https://github.com/szvsw) for the web api implementation.
 
 The repository is supplementary to the following paper:
-[`A hypergraph analysis framework shows carbon reduction potential of effective space use in housing. Ramon Elias Weber, Caitlin Mueller, Christoph Reinhart. 2024 (under review)`](https://arxiv.org/abs/2405.01290)
+[`A hypergraph analysis framework shows carbon reduction potential of effective space use in housing. Ramon Elias Weber, Caitlin Mueller, Christoph Reinhart. Nature Communications 2024`](https://doi.org/10.1038/s41467-024-52506-z)
 
 An archived repository of this code is available at:
 
@@ -14,7 +14,7 @@ An archived repository of this code is available at:
 
 
 Contact: reweber@mit.edu
-
+![me](https://github.com/ramonweber/hypergraph/blob/main/GraphDivision.gif)
 
 ![Hypergraph overview](img/weber2024_hypergraph_collage.jpg)
 *Figure 1: Illustration of the hypergraph representation and environmental analysis of architectural floor plans*
