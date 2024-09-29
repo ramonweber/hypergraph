@@ -97,7 +97,7 @@ The three sample scripts showcase how the hypergraph implementation inside a CAD
 
 ![me](https://github.com/ramonweber/hypergraph/blob/main/whole_building_animation.gif)
 
-Scaffold for integrating the hypergraph functionality and floor plan analysis library into a web API. Contributed by  
+Scaffold for integrating the hypergraph functionality and floor plan analysis library into a web API. Contributed by [@szvsw](https://github.com/szvsw).
 
 ## Consuming the API
 
