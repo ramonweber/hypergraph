@@ -13,9 +13,10 @@ load_dotenv()
 
 # If Env variable is not set, look in
 # default output folder for visual studio build
-cwd = Path(os.getcwd())
-reqs_path = cwd / "dlls" / "reqs"
-libs_path = cwd / "dlls" / "main"
+# Use __file__ to get path relative to this script, not cwd
+hypergraph_root = Path(__file__).resolve().parent.parent.parent  # api/lib/tools.py -> hypergraph root
+reqs_path = hypergraph_root / "dlls" / "reqs"
+libs_path = hypergraph_root / "dlls" / "main"
 for dll_path in os.listdir(reqs_path):
     # get rid of dll extension
     if dll_path.endswith(".dll"):

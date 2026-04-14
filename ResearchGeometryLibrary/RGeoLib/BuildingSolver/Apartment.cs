@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -103,9 +103,10 @@ namespace RGeoLib
 
 
             DataNode reverseNode = DataNode.deserializeDataNode(outstring);
+            reverseNode.convertToRatios();
             this.splitNode = reverseNode;
 
-            NMesh outMesh = DataNode.subdivideWithMesh(reverseNode, inputMesh);
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(reverseNode, inputMesh);
 
             outMesh.SnapToAxis(0.01, 0.01);
 
@@ -155,9 +156,10 @@ namespace RGeoLib
 
 
             DataNode reverseNode = DataNode.deserializeDataNode(outstring);
+            reverseNode.convertToRatios();
             this.splitNode = reverseNode;
 
-            NMesh outMesh = DataNode.subdivideWithMesh(reverseNode, inputMesh);
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(reverseNode, inputMesh);
 
             outMesh.SnapToAxis(0.01, 0.01);
 
@@ -194,7 +196,8 @@ namespace RGeoLib
             inputMesh.facesClockwise();
 
             DataNode rootNode = DataNode.dataNodeFromNMeshAndBoundsWithConnectivity(rooms, bounds, connectionVecs);
-            NMesh outMesh = DataNode.subdivideWithMesh(rootNode, inputMesh);
+            rootNode.convertToRatios();
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(rootNode, inputMesh);
             this.splitNode = rootNode;
 
             outMesh.SnapToAxis(0.01, 0.01);
@@ -844,7 +847,7 @@ namespace RGeoLib
 
                 //Tuple<bool, NMesh> subdivisionTuple = DataNode.TrySubdivideWithMesh(reverseNode, inputMesh); // reverseNode
 
-                NMesh tempDivisionMesh = DataNode.subdivideWithMesh(referenceList[i].splitNode, inputMesh);
+                NMesh tempDivisionMesh = DataNode.subdivideWithMeshRatio(referenceList[i].splitNode, inputMesh);
 
                 bool divisionhappened = false;
                 if (tempDivisionMesh.faceList.Count > 0)
@@ -992,7 +995,7 @@ namespace RGeoLib
 
                 //Tuple<bool, NMesh> subdivisionTuple = DataNode.TrySubdivideWithMesh(reverseNode, inputMesh); // reverseNode
 
-                NMesh tempDivisionMesh = DataNode.subdivideWithMesh(referenceList[i].splitNode, inputMesh);
+                NMesh tempDivisionMesh = DataNode.subdivideWithMeshRatio(referenceList[i].splitNode, inputMesh);
 
                 bool divisionhappened = false;
                 if (tempDivisionMesh.faceList.Count > 0)
@@ -1628,7 +1631,7 @@ namespace RGeoLib
             DataNode reverseNode = sourceApt.splitNode; // DataNode.deserializeDataNode(outstring);
 
 
-            NMesh outMesh = DataNode.subdivideWithMesh(reverseNode, inputMesh); // reverseNode
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(reverseNode, inputMesh); // reverseNode
             inputMesh.SnapToAxis(0.01, 0.01);
 
             // 4 scale all back in reverse
@@ -1692,7 +1695,7 @@ namespace RGeoLib
             DataNode reverseNode = sourceApt.splitNode; // DataNode.deserializeDataNode(outstring);
 
 
-            NMesh outMesh = DataNode.subdivideWithMesh(reverseNode, inputMesh); // reverseNode
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(reverseNode, inputMesh); // reverseNode
             inputMesh.SnapToAxis(0.01, 0.01);
 
             // 4 scale all back in reverse
@@ -1917,7 +1920,8 @@ namespace RGeoLib
 
 
             DataNode reverseNode = DataNode.deserializeDataNode(outstring);
-            NMesh outMesh = DataNode.subdivideWithMesh(reverseNode, tempMesh);
+            reverseNode.convertToRatios();
+            NMesh outMesh = DataNode.subdivideWithMeshRatio(reverseNode, tempMesh);
 
             outMesh.SnapToAxis(0.01, 0.01);
 
