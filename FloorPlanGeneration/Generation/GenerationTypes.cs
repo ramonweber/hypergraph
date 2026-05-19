@@ -28,4 +28,3 @@ namespace FloorPlanGeneration.Generation
         public double Width { get; set; }
     }
 }
-

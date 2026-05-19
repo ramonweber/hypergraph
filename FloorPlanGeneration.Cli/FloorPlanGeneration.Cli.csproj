@@ -11,4 +11,3 @@
     <ProjectReference Include="..\FloorPlanGeneration\FloorPlanGeneration.csproj" />
   </ItemGroup>
 </Project>
-

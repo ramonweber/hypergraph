@@ -68,4 +68,3 @@ namespace FloorPlanGeneration.Topology
         public string Reason { get; set; }
     }
 }
-

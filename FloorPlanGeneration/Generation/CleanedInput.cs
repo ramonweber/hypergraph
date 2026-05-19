@@ -40,4 +40,3 @@ namespace FloorPlanGeneration.Generation
         public bool BlocksGeneration { get; set; }
     }
 }
-
