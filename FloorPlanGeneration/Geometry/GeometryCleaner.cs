@@ -86,17 +86,17 @@ namespace FloorPlanGeneration.Geometry
             }
 
             Polygon2 polygon = new Polygon2(sourceId, sanitized);
-            double area = polygon.Area();
-            if (area <= tolerance * tolerance)
-            {
-                result.Diagnostics.Add(Diagnostic.Error("geometry.zero_area", "Polygon area is below tolerance after cleanup.", sourceId));
-                return result;
-            }
-
             if (GeometryPredicates.PolygonSelfIntersects(polygon, tolerance))
             {
                 result.Diagnostics.Add(Diagnostic.Error("geometry.self_intersection", "Polygon has a self-intersection after cleanup.", sourceId));
                 result.Polygon = polygon;
+                return result;
+            }
+
+            double area = polygon.Area();
+            if (area <= tolerance * tolerance)
+            {
+                result.Diagnostics.Add(Diagnostic.Error("geometry.zero_area", "Polygon area is below tolerance after cleanup.", sourceId));
                 return result;
             }
 
