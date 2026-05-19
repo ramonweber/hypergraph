@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloorPlanGeneration", "FloorPlanGeneration\FloorPlanGeneration.csproj", "{CF599690-E68B-4AC8-95B8-AB3152CB75E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloorPlanGeneration.Cli", "FloorPlanGeneration.Cli\FloorPlanGeneration.Cli.csproj", "{B4C626D1-C34E-4C46-B966-1C27FF1D7C19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloorPlanGeneration.Tests", "FloorPlanGeneration.Tests\FloorPlanGeneration.Tests.csproj", "{72B8BC62-A4DF-429B-910F-B796AC281C58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF599690-E68B-4AC8-95B8-AB3152CB75E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF599690-E68B-4AC8-95B8-AB3152CB75E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF599690-E68B-4AC8-95B8-AB3152CB75E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF599690-E68B-4AC8-95B8-AB3152CB75E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C626D1-C34E-4C46-B966-1C27FF1D7C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C626D1-C34E-4C46-B966-1C27FF1D7C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C626D1-C34E-4C46-B966-1C27FF1D7C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C626D1-C34E-4C46-B966-1C27FF1D7C19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B8BC62-A4DF-429B-910F-B796AC281C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B8BC62-A4DF-429B-910F-B796AC281C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B8BC62-A4DF-429B-910F-B796AC281C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B8BC62-A4DF-429B-910F-B796AC281C58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
+

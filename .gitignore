@@ -1,0 +1,14 @@
+# .NET build and test output. Historical tracked bin/obj files remain tracked.
+[Bb]in/
+[Oo]bj/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# IDE/user-local files
+.vs/
+.idea/
+*.user
+*.suo
+*.nupkg

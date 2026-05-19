@@ -1,0 +1,88 @@
+{
+  "project": {
+    "id": "rectangular-core-sample",
+    "name": "Rectangular Core Sample",
+    "units": "m",
+    "tolerance": 0.01,
+    "seed": 20260519
+  },
+  "floorplate": {
+    "outer": {
+      "id": "floorplate-01",
+      "points": [
+        { "x": 0.0, "y": 0.0 },
+        { "x": 42.0, "y": 0.0 },
+        { "x": 42.0, "y": 22.0 },
+        { "x": 0.0, "y": 22.0 }
+      ]
+    },
+    "holes": []
+  },
+  "fixedElements": [
+    {
+      "id": "core-01",
+      "type": "core",
+      "blocksGeneration": true,
+      "polygon": {
+        "id": "core-01",
+        "points": [
+          { "x": 18.0, "y": 8.0 },
+          { "x": 24.0, "y": 8.0 },
+          { "x": 24.0, "y": 14.0 },
+          { "x": 18.0, "y": 14.0 }
+        ]
+      }
+    }
+  ],
+  "access": {
+    "entryPoints": [
+      { "x": 21.0, "y": 0.0 }
+    ],
+    "verticalCoreAccess": [
+      { "x": 21.0, "y": 14.0 }
+    ],
+    "corridorStartPoints": [],
+    "corridorEndPoints": [],
+    "corridorCenterlines": []
+  },
+  "facade": {
+    "segments": [],
+    "daylightCapableEdges": [],
+    "nonDaylightEdges": []
+  },
+  "program": {
+    "targetUnitTypes": [
+      { "type": "studio", "minArea": 30.0, "maxArea": 55.0, "targetRatio": 0.35, "weight": 1.0 },
+      { "type": "one_bed", "minArea": 50.0, "maxArea": 78.0, "targetRatio": 0.45, "weight": 1.0 },
+      { "type": "two_bed", "minArea": 72.0, "maxArea": 108.0, "targetRatio": 0.20, "weight": 0.8 }
+    ],
+    "roomTypes": [
+      { "type": "bedroom", "minArea": 10.0, "minWidth": 2.7, "minDepth": 2.7, "requiresDaylight": true },
+      { "type": "living", "minArea": 14.0, "minWidth": 3.0, "minDepth": 3.0, "requiresDaylight": true },
+      { "type": "bathroom", "minArea": 3.5, "minWidth": 1.6, "minDepth": 2.0, "isWet": true }
+    ]
+  },
+  "rules": {
+    "minCorridorWidth": 2.0,
+    "minRoomWidth": 2.4,
+    "minRoomDepth": 2.4,
+    "doorWidth": 0.9,
+    "wetRoomAdjacencyPreferred": true,
+    "requireDaylightForBedrooms": true,
+    "requireDaylightForLiving": true,
+    "minUnitArea": 25.0
+  },
+  "generationSettings": {
+    "variantCount": 6,
+    "timeLimitMilliseconds": 1000,
+    "strictness": "balanced",
+    "weightedVariation": true,
+    "scoringWeights": {
+      "efficiency": 0.30,
+      "netGrossRatio": 0.20,
+      "unitMixMatch": 0.25,
+      "unitQuality": 0.15,
+      "daylight": 0.10
+    }
+  }
+}
